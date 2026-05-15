@@ -1,0 +1,2690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智联企业出海「全球发」— Swiss Modern</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           MANDATORY BASE STYLES (from viewport-and-base.css)
+           =========================================== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; overflow-x: hidden; }
+        html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: var(--slide-padding);
+            font-family: 'Noto Sans SC', 'Inter', sans-serif;
+        }
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+        }
+
+        :root {
+            --brand-blue: #004BFE;
+            --brand-yellow: #FFD800;
+            --text-primary: #1a1a2e;
+            --text-secondary: #5a5a7a;
+            --bg-white: #ffffff;
+            --bg-light: #f8f9fc;
+            --border-light: #e8eaf0;
+            --title-size: clamp(1.8rem, 5vw, 3.8rem);
+            --h2-size: clamp(1.2rem, 3vw, 2.2rem);
+            --h3-size: clamp(0.95rem, 2vw, 1.4rem);
+            --body-size: clamp(0.8rem, 1.5vw, 1.05rem);
+            --small-size: clamp(0.65rem, 1vw, 0.85rem);
+            --slide-padding: clamp(1.5rem, 5vw, 5rem);
+            --content-gap: clamp(0.75rem, 2.5vw, 2rem);
+            --element-gap: clamp(0.3rem, 1vw, 0.8rem);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+        }
+
+        /* Swiss Modern: Clean white, grid, typography */
+        .slide-bg-white { background: var(--bg-white); }
+        .slide-bg-light { background: var(--bg-light); }
+        .slide-bg-blue { background: var(--brand-blue); }
+
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* Typography */
+        h1 { font-size: var(--title-size); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-primary); }
+        h2 { font-size: var(--h2-size); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--text-primary); }
+        h3 { font-size: var(--h3-size); font-weight: 600; line-height: 1.3; color: var(--text-primary); }
+        p, li { font-size: var(--body-size); font-weight: 400; line-height: 1.6; color: var(--text-secondary); }
+        .text-blue { color: var(--brand-blue); }
+        .text-white { color: #ffffff; }
+        .text-yellow { color: var(--brand-yellow); }
+        .font-light { font-weight: 300; }
+        .font-medium { font-weight: 500; }
+        .font-bold { font-weight: 800; }
+
+        /* Swiss grid */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--content-gap); }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--content-gap); }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--element-gap); }
+        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--element-gap); }
+        .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--element-gap); }
+
+        /* Swiss cards */
+        .swiss-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: clamp(1rem, 2vw, 1.5rem);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .swiss-card:hover {
+            box-shadow: 0 8px 32px rgba(0, 75, 254, 0.08);
+            border-color: var(--brand-blue);
+        }
+        .swiss-card-blue {
+            background: var(--brand-blue);
+            border: none;
+            border-radius: 8px;
+            padding: clamp(1rem, 2vw, 1.5rem);
+        }
+
+        /* Big number stat */
+        .stat-number {
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            color: var(--brand-blue);
+        }
+        .stat-label {
+            font-size: var(--small-size);
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Section tag */
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: var(--small-size);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--brand-blue);
+            margin-bottom: var(--element-gap);
+        }
+        .section-tag::before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--brand-blue);
+        }
+
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--brand-blue);
+            margin: var(--element-gap) 0;
+        }
+        .divider-yellow {
+            background: var(--brand-yellow);
+        }
+
+        /* Country switcher buttons */
+        .country-btn {
+            padding: 0.4rem 0.65rem;
+            border-radius: 6px;
+            background: #f5f7fa;
+            color: var(--text-primary);
+            font-size: var(--small-size);
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.15s, color 0.15s;
+        }
+        .country-btn:hover { background: #e8ecf4; }
+        .country-btn.active {
+            background: var(--brand-blue);
+            color: #fff;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--brand-blue);
+            z-index: 1000;
+            transition: width 0.3s var(--ease-out-expo);
+        }
+
+        /* Nav dots */
+        .nav-dots {
+            position: fixed;
+            right: clamp(1rem, 2vw, 2rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .nav-dot.active {
+            background: var(--brand-blue);
+            transform: scale(1.3);
+        }
+        .nav-dot:hover { background: var(--brand-blue); opacity: 0.7; }
+
+        /* Slide number */
+        .slide-num {
+            position: absolute;
+            bottom: clamp(1rem, 2vw, 2rem);
+            right: clamp(1rem, 2vw, 2rem);
+            font-size: var(--small-size);
+            font-weight: 600;
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        /* ===========================================
+           SLIDE 1: TITLE
+           =========================================== */
+        .slide-title {
+            background: var(--brand-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide-title .slide-content {
+            text-align: left;
+            align-items: flex-start;
+        }
+        .slide-title .eyebrow {
+            font-size: var(--small-size);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--brand-blue);
+            margin-bottom: 1.5rem;
+        }
+        .slide-title h1 {
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+        .slide-title .subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.3rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+        .slide-title .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--brand-blue);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            font-size: var(--small-size);
+            font-weight: 600;
+        }
+        .title-image {
+            width: 100%;
+            max-height: min(40vh, 320px);
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 2rem;
+            box-shadow: 0 4px 24px rgba(0, 75, 254, 0.12);
+        }
+
+        /* ===========================================
+           SLIDE 2: CONTENTS
+           =========================================== */
+        .slide-contents .slide-content { padding-left: clamp(2rem, 8vw, 10rem); }
+        .contents-list { list-style: none; display: flex; flex-direction: column; gap: clamp(0.75rem, 1.5vh, 1.2rem); }
+        .contents-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: var(--h3-size);
+            font-weight: 600;
+            color: var(--text-primary);
+            padding: clamp(0.6rem, 1.5vh, 1rem) 0;
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+        .contents-item:hover { padding-left: 0.5rem; border-color: var(--brand-blue); }
+        .contents-num {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 900;
+            color: var(--brand-blue);
+            opacity: 0.3;
+            min-width: 2.5rem;
+        }
+
+        /* ===========================================
+           SLIDE 3: SECTION DIVIDER
+           =========================================== */
+        .slide-section {
+            background: var(--brand-blue);
+            display: flex;
+            align-items: center;
+        }
+        .slide-section .slide-content { align-items: flex-start; padding-left: clamp(2rem, 8vw, 10rem); }
+        .slide-section .section-num {
+            font-size: clamp(5rem, 15vw, 12rem);
+            font-weight: 900;
+            color: rgba(255,255,255,0.1);
+            line-height: 1;
+            margin-bottom: -1rem;
+        }
+        .slide-section h1 { color: white; }
+        .slide-section p { color: rgba(255,255,255,0.7); font-size: var(--h3-size); margin-top: 0.5rem; }
+
+        /* ===========================================
+           SLIDE 4: STATS
+           =========================================== */
+        .slide-stats .grid-5 { align-items: start; }
+        .stat-box {
+            padding: clamp(1.2rem, 2.5vw, 2rem);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            background: var(--bg-white);
+            text-align: center;
+        }
+        .stat-icon {
+            display: block;
+            margin: 0 auto 0.75rem;
+            width: 36px;
+            height: 36px;
+        }
+        .stat-icon-emoji {
+            display: block;
+            margin: 0 auto 0.5rem;
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .stat-box .stat-number { margin-bottom: 0.25rem; }
+
+        /* ===========================================
+           SLIDE 5: ADVANTAGES
+           =========================================== */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+            gap: var(--content-gap);
+        }
+        /* ===========================================
+           SLIDE 5: ADVANTAGES (图文模式)
+           =========================================== */
+        .adv-card {
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            background: var(--bg-white);
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+        .adv-icon-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--brand-blue);
+            margin: 0 auto 1.25rem;
+        }
+        .adv-num {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1;
+        }
+        .adv-card h3 {
+            font-size: var(--h3-size);
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+        .adv-card p {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .advantage-item h3 { font-size: var(--body-size); font-weight: 700; color: var(--brand-blue); margin-bottom: 0.25rem; }
+        .advantage-item p { font-size: var(--small-size); }
+
+        /* ===========================================
+           SLIDE 6: SERVICE FLOW
+           =========================================== */
+        .flow-steps {
+            display: flex;
+            gap: var(--content-gap);
+            align-items: stretch;
+        }
+        .flow-step {
+            flex: 1;
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: clamp(1rem, 2vw, 1.5rem);
+            position: relative;
+        }
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--brand-blue);
+            font-weight: 700;
+        }
+        .flow-step:last-child::after { display: none; }
+        .step-num {
+            display: inline-block;
+            width: clamp(1.5rem, 3vw, 2rem);
+            height: clamp(1.5rem, 3vw, 2rem);
+            line-height: clamp(1.5rem, 3vw, 2rem);
+            text-align: center;
+            background: var(--brand-blue);
+            color: white;
+            border-radius: 50%;
+            font-size: var(--small-size);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .flow-step h3 { font-size: var(--body-size); font-weight: 700; margin-bottom: 0.25rem; }
+        .flow-step p { font-size: var(--small-size); }
+
+        /* ===========================================
+           SLIDE 7: COUNTRIES
+           =========================================== */
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+            gap: var(--element-gap);
+        }
+        .country-tag {
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            font-size: var(--small-size);
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        /* ===========================================
+           SLIDE 8: PACKAGE
+           =========================================== */
+        .package-card {
+            background: var(--bg-white);
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+        }
+        .package-card.featured {
+            border-color: var(--brand-blue);
+            box-shadow: 0 8px 40px rgba(0, 75, 254, 0.12);
+        }
+        .package-label {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--brand-blue);
+            color: white;
+            border-radius: 100px;
+            font-size: var(--small-size);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .package-label.yellow { background: var(--brand-yellow); color: var(--text-primary); }
+
+        /* ===========================================
+           SLIDE 9: CASE
+           =========================================== */
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--content-gap);
+            align-items: center;
+        }
+        .case-image {
+            width: 100%;
+            max-height: min(45vh, 360px);
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* ===========================================
+           SLIDE 10: SERVICE OVERVIEW
+           =========================================== */
+        .service-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+            gap: var(--element-gap);
+        }
+        .service-item {
+            padding: clamp(0.75rem, 1.5vw, 1.25rem);
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-size: var(--small-size);
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .service-item.blue-bg {
+            background: var(--brand-blue);
+            color: white;
+            border-color: var(--brand-blue);
+        }
+
+        /* ===========================================
+           SLIDE 15: PRODUCT MATRIX (参考图样式)
+           =========================================== */
+        .pmatrix {
+            display: grid;
+            grid-template-columns: 120px repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 0.8rem;
+            align-items: stretch;
+        }
+        .pmatrix-col {
+            display: flex;
+            flex-direction: column;
+        }
+        .pmatrix-label-col {
+            gap: 8px;
+        }
+        .pmatrix-col-header {
+            background: var(--brand-blue);
+            color: white;
+            text-align: center;
+            padding: 0.6rem 0.5rem;
+            font-size: clamp(0.7rem, 1vw, 0.85rem);
+            font-weight: 700;
+            border-radius: 8px 8px 0 0;
+        }
+        .pmatrix-label-col .pmatrix-col-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 58px;
+        }
+        .pmatrix-label-box {
+            background: #F8F9FA;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            padding: 0.5rem 0.6rem;
+            min-height: 58px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .pmatrix-label-title { font-size: clamp(0.75rem, 1vw, 0.85rem); font-weight: 700; color: #1a1a1a; }
+        .pmatrix-label-sub { font-size: clamp(0.55rem, 0.75vw, 0.65rem); color: #666; margin-top: 0.15rem; }
+        .pmatrix-col-header .pmatrix-col-title { font-size: clamp(0.9rem, 1.2vw, 1.1rem); font-weight: 700; }
+        .pmatrix-col-header .pmatrix-col-sub { font-size: clamp(0.5rem, 0.7vw, 0.6rem); color: rgba(255,255,255,0.8); margin-top: 0.2rem; font-weight: 400; }
+        .pmatrix-col-body {
+            background: white;
+            border: 1px solid #E0E0E0;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 0.8rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.6rem;
+            min-height: 196px;
+        }
+        .pmatrix-item {
+            font-size: clamp(0.7rem, 0.95vw, 0.82rem);
+            color: #1a1a1a;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .pmatrix-item-gray { color: #999; }
+        .psupport {
+            background: #F5F7FA;
+            border-radius: 15px;
+            padding: 1rem 1.2rem;
+        }
+        .psupport-title {
+            font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 0.7rem;
+        }
+        .psupport-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .psupport-item {
+            background: white;
+            border: 1px solid #E0E0E0;
+            border-radius: 5px;
+            padding: 0.6rem 0.5rem;
+            font-size: clamp(0.62rem, 0.82vw, 0.72rem);
+            color: #333;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+        .psupport-icon {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+        .psupport-icon::before {
+            content: '';
+            display: block;
+            width: 14px;
+            height: 14px;
+            background: var(--brand-blue);
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+        .psupport-icon[data-icon="globe"]::before { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/%3E%3C/svg%3E"); }
+        .psupport-icon[data-icon="doc"]::before { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6M16 13H8M16 17H8M10 9H8'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6M16 13H8M16 17H8M10 9H8'/%3E%3C/svg%3E"); }
+        .psupport-icon[data-icon="screen"]::before { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Crect x='2' y='3' width='20' height='14' rx='2'/%3E%3Cpath d='M8 21h8M12 17v4'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Crect x='2' y='3' width='20' height='14' rx='2'/%3E%3Cpath d='M8 21h8M12 17v4'/%3E%3C/svg%3E"); }
+        .psupport-icon[data-icon="bank"]::before { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Cpath d='M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Cpath d='M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3'/%3E%3C/svg%3E"); }
+        .psupport-icon[data-icon="person"]::before { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"); }
+        .psupport-icon[data-icon="visa"]::before { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Crect x='3' y='4' width='18' height='16' rx='2'/%3E%3Cpath d='M7 15h10M7 11h10M9 7h6'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Crect x='3' y='4' width='18' height='16' rx='2'/%3E%3Cpath d='M7 15h10M7 11h10M9 7h6'/%3E%3C/svg%3E"); }
+        .psupport-icon[data-icon="chart"]::before { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Cpath d='M18 20V10M12 20V4M6 20v-6'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Cpath d='M18 20V10M12 20V4M6 20v-6'/%3E%3C/svg%3E"); }
+        .psupport-icon[data-icon="help"]::before { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004BFE' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01'/%3E%3C/svg%3E"); }
+
+        /* ===========================================
+           SLIDE 18: PARTNER GRID
+           =========================================== */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .partner-card {
+            background: #F7F9FC;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 1.1rem 1rem;
+        }
+        .partner-country {
+            font-size: var(--small-size);
+            font-weight: 700;
+            color: var(--brand-blue);
+            margin-bottom: 0.65rem;
+        }
+        .partner-list {
+            font-size: clamp(0.6rem, 0.85vw, 0.78rem);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 0.35rem;
+            padding-left: 0.5rem;
+            border-left: 2px solid var(--brand-blue);
+        }
+
+        /* ===========================================
+           SLIDE 11: THANK YOU
+           =========================================== */
+        .slide-thanks {
+            background: var(--brand-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide-thanks .slide-content {
+            text-align: center;
+            align-items: center;
+        }
+        .contact-info {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: var(--small-size);
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ===========================================
+           SLIDE 12-30: APPENDIX
+           =========================================== */
+        .slide-appendix {
+            background: var(--bg-light);
+        }
+        .appendix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: var(--content-gap);
+        }
+        .appendix-item {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: clamp(1rem, 2vw, 1.5rem);
+        }
+        .appendix-item h3 { font-size: var(--body-size); font-weight: 700; margin-bottom: 0.5rem; color: var(--brand-blue); }
+        .appendix-item p { font-size: var(--small-size); }
+
+        /* Slide 13 SEEK */
+        .seek-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--content-gap);
+            align-items: center;
+        }
+
+        /* Responsive */
+        /* ============================
+           RESPONSIVE MOBILE STYLES
+           ============================ */
+        @media (max-width: 768px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 4vw, 1.5rem);
+                --title-size: clamp(1.6rem, 7vw, 3rem);
+                --body-size: clamp(0.8rem, 3.5vw, 1.05rem);
+                --small-size: clamp(0.65rem, 2.8vw, 0.85rem);
+            }
+
+            /* Hide nav dots on mobile, show simplified progress */
+            .nav-dots {
+                display: flex !important;
+                flex-direction: row;
+                bottom: 10px;
+                top: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                right: auto;
+                gap: 6px;
+            }
+            .nav-dots .nav-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: rgba(0, 75, 254, 0.3);
+            }
+            .nav-dots .nav-dot.active {
+                background: var(--brand-blue);
+                transform: scale(1.2);
+            }
+
+            /* Full-width slides, no horizontal scroll */
+            .slide {
+                min-width: 100vw;
+                padding: var(--slide-padding);
+                padding-top: calc(var(--slide-padding) + 40px);
+            }
+
+            /* Grid collapses to single column */
+            .grid-2, .grid-3, .grid-4,
+            .case-grid, .seek-intro,
+            .platform-grid, .service-matrix {
+                grid-template-columns: 1fr !important;
+                gap: 1rem;
+            }
+
+            /* Steps vertical on mobile */
+            .flow-steps {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .flow-step::after { display: none !important; }
+            .flow-step {
+                border-left: 3px solid var(--brand-blue);
+                padding-left: 1rem;
+                margin-left: 0.5rem;
+            }
+
+            /* Logo smaller on mobile */
+            .logo-top {
+                height: 28px !important;
+                top: 0.75rem;
+                right: 0.75rem;
+            }
+
+            /* Section tag smaller */
+            .section-tag {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.6rem;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Cards full width */
+            .card, .platform-card {
+                width: 100%;
+                margin-bottom: 0.75rem;
+            }
+
+            /* Table horizontal scroll */
+            .table-scroll {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .data-table {
+                font-size: 0.75rem;
+                min-width: 600px;
+            }
+
+            /* Buttons full width */
+            .filter-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            /* Home slide text */
+            .hero-title {
+                font-size: clamp(1.8rem, 9vw, 3.5rem) !important;
+                line-height: 1.2;
+                white-space: normal !important;
+            }
+            .hero-sub {
+                font-size: clamp(0.9rem, 4vw, 1.3rem) !important;
+            }
+            .hero-circle {
+                width: 200px;
+                height: 200px;
+            }
+
+            /* Home slide portrait specific */
+            @media (max-width: 768px) and (orientation: portrait) {
+                .slide[data-slide="1"] .slide-content {
+                    align-items: flex-start !important;
+                    text-align: left !important;
+                    justify-content: flex-start !important;
+                    padding-top: 1rem;
+                    padding-left: 1.25rem;
+                    padding-right: 1.25rem;
+                }
+                .slide[data-slide="1"] img[src*="logo_white"] {
+                    height: 50px !important;
+                    margin-bottom: 1.5rem;
+                }
+                .slide[data-slide="1"] .hero-title {
+                    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
+                    line-height: 1.2 !important;
+                    word-break: break-word;
+                }
+                .slide[data-slide="1"] .slide-content > p {
+                    font-size: clamp(0.8rem, 3vw, 1rem) !important;
+                    line-height: 1.5 !important;
+                    max-width: 100% !important;
+                    text-align: left !important;
+                }
+                .slide[data-slide="1"] .slide-content > div[style*="inline-flex"] {
+                    font-size: 0.65rem !important;
+                    padding: 0.35rem 0.7rem !important;
+                }
+                .slide[data-slide="1"] .hero-circle,
+                .slide[data-slide="1"] [aria-hidden="true"] {
+                    display: none !important;
+                }
+            }
+
+            /* Page 15 product matrix - responsive on mobile */
+            @media (max-width: 768px) and (orientation: portrait) {
+                .slide[data-slide="15"] {
+                    height: auto;
+                    min-height: 100vh;
+                    min-height: 100dvh;
+                }
+                .slide[data-slide="15"] .slide-content {
+                    height: auto;
+                    overflow: visible;
+                    justify-content: flex-start;
+                    padding-top: 0.5rem;
+                    padding-bottom: 1rem;
+                }
+                .slide[data-slide="15"] .pmatrix {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.4rem;
+                }
+                .slide[data-slide="15"] .pmatrix-label-col {
+                    display: none;
+                }
+                .slide[data-slide="15"] .pmatrix-col {
+                    border: 1px solid #E0E0E0;
+                    border-radius: 8px;
+                    overflow: hidden;
+                }
+                .slide[data-slide="15"] .pmatrix-col-header {
+                    padding: 0.4rem 0.6rem;
+                    font-size: 0.7rem;
+                }
+                .slide[data-slide="15"] .pmatrix-col-body {
+                    padding: 0.5rem 0.6rem;
+                    min-height: auto;
+                    border-radius: 0;
+                    border: none;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 0.3rem;
+                }
+                .slide[data-slide="15"] .pmatrix-item {
+                    font-size: 0.65rem;
+                    background: #F8F9FA;
+                    padding: 0.25rem 0.4rem;
+                    border-radius: 4px;
+                    border: 1px solid #E0E0E0;
+                }
+                .slide[data-slide="15"] .psupport {
+                    padding: 0.6rem;
+                }
+                .slide[data-slide="15"] .psupport-title {
+                    font-size: 0.65rem;
+                    margin-bottom: 0.4rem;
+                }
+                .slide[data-slide="15"] .psupport-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 0.3rem;
+                }
+                .slide[data-slide="15"] .psupport-item {
+                    font-size: 0.6rem;
+                    padding: 0.25rem 0.4rem;
+                }
+                .slide[data-slide="15"] .psupport-icon {
+                    font-size: 0.75rem;
+                }
+                .slide[data-slide="15"] h2 {
+                    font-size: 1rem !important;
+                    margin-bottom: 0.5rem !important;
+                }
+            }
+
+            /* Page 18 platform grid - mobile: single column */
+            @media (max-width: 768px) and (orientation: portrait) {
+                .slide[data-slide="18"] {
+                    height: auto;
+                    min-height: 100vh;
+                    min-height: 100dvh;
+                }
+                .slide[data-slide="18"] .slide-content {
+                    height: auto;
+                    overflow: visible;
+                    justify-content: flex-start;
+                    padding-top: 0.5rem;
+                    padding-bottom: 1rem;
+                }
+                .slide[data-slide="18"] .platform-grid {
+                    grid-template-columns: 1fr !important;
+                    gap: 0.5rem;
+                }
+                .slide[data-slide="18"] .platform-card {
+                    padding: 0.75rem;
+                }
+                .slide[data-slide="18"] .platform-card h3 {
+                    font-size: 0.8rem;
+                }
+                .slide[data-slide="18"] .platform-card p {
+                    font-size: 0.65rem;
+                }
+                .slide[data-slide="18"] .platform-logo {
+                    height: 24px;
+                }
+            }
+
+            /* Page 20 CV steps - mobile portrait: stacked vertically */
+            @media (max-width: 768px) and (orientation: portrait) {
+                .slide[data-slide="20"] {
+                    height: auto;
+                    min-height: 100vh;
+                    min-height: 100dvh;
+                }
+                .slide[data-slide="20"] .slide-content {
+                    height: auto;
+                    overflow: visible;
+                    justify-content: flex-start;
+                    padding-top: 0.5rem;
+                    padding-bottom: 1rem;
+                }
+                .slide[data-slide="20"] .slide-content > div[style*="grid-template-columns"] {
+                    grid-template-columns: 1fr !important;
+                    gap: 0.75rem;
+                    height: auto;
+                }
+                .slide[data-slide="20"] .cv-step {
+                    padding: 0.75rem 1rem;
+                }
+                .slide[data-slide="20"] .cv-step-num {
+                    font-size: 1.2rem;
+                    min-width: 32px;
+                }
+                .slide[data-slide="20"] .cv-step h3 {
+                    font-size: 0.85rem;
+                }
+                .slide[data-slide="20"] .cv-step p {
+                    font-size: 0.7rem;
+                }
+                .slide[data-slide="20"] .cv-img {
+                    height: 200px;
+                }
+                .slide[data-slide="20"] .cv-img img {
+                    object-fit: cover;
+                }
+            }
+
+            /* Page 4 stats grid - 2 columns on mobile */
+            @media (max-width: 768px) and (orientation: portrait) {
+                .slide[data-slide="4"] .grid-5 {
+                    grid-template-columns: 1fr 1fr !important;
+                    gap: 0.75rem;
+                }
+                .slide[data-slide="4"] .stat-box {
+                    padding: 1rem 0.75rem;
+                }
+                .slide[data-slide="4"] .stat-number {
+                    font-size: clamp(1.4rem, 5vw, 2rem);
+                }
+                .slide[data-slide="4"] .stat-label {
+                    font-size: 0.65rem;
+                }
+            }
+
+            /* Page 5 advantages grid - 2 columns on mobile */
+            @media (max-width: 768px) and (orientation: portrait) {
+                .slide[data-slide="5"] .grid-4 {
+                    grid-template-columns: 1fr 1fr !important;
+                    gap: 0.75rem;
+                }
+                .slide[data-slide="5"] .adv-card {
+                    padding: 1rem;
+                }
+                .slide[data-slide="5"] .adv-card h3 {
+                    font-size: 0.9rem;
+                }
+                .slide[data-slide="5"] .adv-card p {
+                    font-size: 0.7rem;
+                    line-height: 1.4;
+                }
+                .slide[data-slide="5"] .adv-icon-wrap {
+                    width: 28px;
+                    height: 28px;
+                    font-size: 0.75rem;
+                }
+            }
+
+            /* Page 9-11 tables - horizontal scroll on mobile */
+            @media (max-width: 768px) and (orientation: portrait) {
+                .slide[data-slide="9"] .pkg3-table,
+                .slide[data-slide="9"] .pricing-table,
+                .slide[data-slide="10"] .pkg3-table,
+                .slide[data-slide="10"] .pricing-table,
+                .slide[data-slide="11"] .pkg3-table,
+                .slide[data-slide="11"] .pricing-table {
+                    display: block;
+                    overflow-x: auto;
+                    -webkit-overflow-scrolling: touch;
+                    font-size: 0.65rem;
+                }
+                .slide[data-slide="9"] .pkg3-table th,
+                .slide[data-slide="9"] .pkg3-table td,
+                .slide[data-slide="10"] .pkg3-table th,
+                .slide[data-slide="10"] .pkg3-table td,
+                .slide[data-slide="11"] .pkg3-table th,
+                .slide[data-slide="11"] .pkg3-table td {
+                    padding: 0.4rem 0.3rem;
+                    min-width: 60px;
+                }
+                .slide[data-slide="9"] .pkg3-table .logo-cell img,
+                .slide[data-slide="10"] .pkg3-table .logo-cell img,
+                .slide[data-slide="11"] .pkg3-table .logo-cell img {
+                    height: 18px !important;
+                }
+                .slide[data-slide="11"] .pkg3-table {
+                    font-size: 0.6rem;
+                }
+                .slide[data-slide="11"] .pkg3-table td,
+                .slide[data-slide="11"] .pkg3-table th {
+                    padding: 0.35rem 0.25rem;
+                    min-width: 50px;
+                }
+                .slide[data-slide="11"] .pkg3-table .logo-cell img {
+                    height: 16px !important;
+                }
+                .slide[data-slide="11"] .pkg3-table td[style*="line-height"] {
+                    font-size: 0.55rem !important;
+                    line-height: 1.3 !important;
+                }
+            }
+        }
+
+        @media (max-height: 600px) {
+            :root { --slide-padding: clamp(0.75rem, 3vw, 2rem); }
+            .nav-dots { display: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            html { scroll-behavior: auto; }
+        }
+
+        /* Image */
+        .full-img {
+            width: 100%;
+            max-height: min(55vh, 440px);
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Bullet list */
+        .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .bullet-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: var(--body-size);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .bullet-list li::before {
+            content: '—';
+            color: var(--brand-blue);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* 4-step process */
+        .process-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--content-gap);
+        }
+        .process-item {
+            text-align: center;
+            padding: clamp(1rem, 2vw, 1.5rem);
+        }
+        .process-icon {
+            width: clamp(2.5rem, 5vw, 3.5rem);
+            height: clamp(2.5rem, 5vw, 3.5rem);
+            background: var(--brand-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 900;
+            color: white;
+        }
+        .process-item h3 { font-size: var(--body-size); font-weight: 700; margin-bottom: 0.25rem; }
+        .process-item p { font-size: var(--small-size); }
+    
+        /* ====== Asia Package Tables ====== */
+        .asia-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: var(--small-size);
+        }
+        .asia-table-header {
+            display: flex;
+            background: var(--bg-light);
+            border-radius: 8px 8px 0 0;
+            font-weight: 700;
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+        }
+        .asia-table-header span:first-child { flex: 2; }
+        .asia-table-header span:last-child { flex: 1; text-align: center; }
+        .asia-table-row {
+            display: flex;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .asia-table-row:last-child { border-bottom: none; }
+        .asia-table-row span:first-child { flex: 2; color: var(--text-primary); }
+        .asia-table-row span:last-child { flex: 1; text-align: center; color: var(--brand-blue); font-weight: 600; }
+        .asia-pricing {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+        .asia-pricing-title {
+            font-weight: 700;
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        .asia-pricing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-light);
+        }
+        .asia-pricing-row:last-child { border-bottom: none; }
+        .asia-pricing-row.pricing-header {
+            background: var(--brand-blue);
+            color: white;
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+        .asia-pricing-row.pricing-header .price { color: white; }
+        .asia-pricing-row.featured {
+            background: #E8F0FF;
+            border-radius: 8px;
+            color: var(--brand-blue);
+            padding: 0.5rem 0.75rem;
+            margin: 0 -0.5rem;
+        }
+        .asia-pricing-row.featured .price { font-size: var(--h3-size); font-weight: 900; color: var(--brand-blue); }
+        .asia-pricing-row:not(.featured) .price { color: var(--brand-blue); font-weight: 700; }
+
+        /* ====== Pricing Table ====== */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+        }
+        .pricing-table th, .pricing-table td {
+            padding: 0.6rem 1rem;
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+        .pricing-table th {
+            background: var(--brand-blue);
+            color: white;
+            font-weight: 700;
+            font-size: var(--small-size);
+        }
+        .pricing-table td { background: white; color: var(--text-secondary); font-size: var(--small-size); }
+        .pricing-table td:last-child { color: var(--brand-blue); font-weight: 700; }
+        .pricing-table tr.featured td { background: #E8F0FF; color: var(--brand-blue); }
+        .pricing-table tr.featured td:last-child { font-weight: 900; font-size: var(--h3-size); }
+        .pricing-table .note { font-size: var(--small-size); color: var(--text-secondary); text-align: left; }
+        /* ====== Other Country Table ====== */
+        .other-country-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--small-size);
+        }
+        .oct-header {
+            display: flex;
+            background: var(--bg-light);
+            border-radius: 8px 8px 0 0;
+            font-weight: 700;
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+        }
+        .oct-header span:nth-child(1) { flex: 2; }
+        .oct-header span:nth-child(2) { flex: 1; text-align: center; }
+        .oct-header span:nth-child(3) { flex: 3; }
+        .oct-row {
+            display: flex;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .oct-row:last-child { border-bottom: none; }
+        .oct-row span:nth-child(1) { flex: 2; color: var(--text-primary); }
+        .oct-row span:nth-child(2) { flex: 1; text-align: center; color: var(--text-secondary); }
+        .oct-row span:nth-child(3) { flex: 3; color: var(--text-secondary); }
+
+
+        /* ====== Country Grid ====== */
+        .country-grid {
+            width: 100%;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .cg-header {
+            display: flex;
+            background: var(--brand-blue);
+            color: white;
+            font-weight: 700;
+            font-size: var(--small-size);
+        }
+        .cg-header span {
+            flex: 1;
+            padding: 0.5rem 0.5rem;
+            text-align: center;
+        }
+        .cg-row {
+            display: flex;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .cg-row:last-child { border-bottom: none; }
+        .cg-cell {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 0.25rem;
+            border-right: 1px solid var(--border-light);
+            gap: 0.2rem;
+        }
+        .cg-cell:last-child { border-right: none; }
+        .cg-cell.cg-platform { background: var(--bg-light); }
+        .cg-flag { font-size: clamp(1rem, 2vw, 1.5rem); line-height: 1; }
+        .cg-name { font-size: clamp(0.6rem, 1vw, 0.75rem); color: var(--text-primary); text-align: center; }
+        .cg-site { font-size: clamp(0.55rem, 0.9vw, 0.7rem); color: var(--brand-blue); font-weight: 600; text-align: center; }
+
+
+        /* ====== Package Table (vertical header) ====== */
+        .pkg-table {
+            width: 100%;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .pkg-table-header {
+            display: flex;
+            background: var(--brand-blue);
+            color: white;
+        }
+        .pkg-table-label {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: var(--small-size);
+        }
+        .pkg-table-row {
+            display: flex;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .pkg-table-row:last-child { border-bottom: none; }
+        .pkg-country {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1rem;
+            padding: 0.6rem 1rem;
+        }
+        .pkg-platform-cell {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1.5rem;
+            font-size: var(--small-size);
+            color: var(--brand-blue);
+            font-weight: 600;
+            border-left: 1px solid var(--border-light);
+            min-width: 120px;
+        }
+        .pkg-flag { font-size: clamp(1rem, 2vw, 1.4rem); line-height: 1; }
+        .pkg-name { font-size: var(--small-size); color: var(--text-primary); }
+
+
+        /* ====== Package Table v3 (real table) ====== */
+        .pkg3-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            overflow: hidden;
+            table-layout: fixed;
+        }
+        .pkg3-table th, .pkg3-table td {
+            border: 1px solid var(--border-light);
+            padding: 0;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .pkg3-table th.label-col {
+            background: var(--brand-blue);
+            color: white;
+            font-weight: 700;
+            font-size: var(--small-size);
+            width: 100px;
+        }
+        .pkg3-table td.label-col {
+            background: var(--brand-blue);
+            color: white;
+            font-weight: 700;
+            font-size: var(--small-size);
+        }
+        .pkg3-table .country-cell { padding: 0.4rem 0.2rem; }
+        .pkg3-table .country-cell .flag { font-size: clamp(1rem, 1.6vw, 1.4rem); display: block; line-height: 1.2; }
+        .pkg3-table .country-cell .cname { font-size: clamp(0.4rem, 0.65vw, 0.6rem); display: block; line-height: 1.3; color: var(--text-primary); }
+        .pkg3-table .logo-cell { padding: 0.4rem 0.2rem; background: white; }
+        .pkg3-table .logo-cell img { height: 26px; width: auto; object-fit: contain; }
+        .pkg3-table .logo-cell.col-span { border-left-color: transparent; border-right-color: transparent; background: transparent; }
+
+</style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <nav class="nav-dots" id="navDots"></nav>
+
+    <!-- ========== SLIDE 1: TITLE ========== -->
+    <section class="slide slide-title" data-slide="1">
+        <div class="slide-content" style="align-items:flex-start; text-align:left; padding:4vh 6vw; position:relative; overflow:hidden;">
+            <!-- 左上角 Logo -->
+            <div style="margin-bottom:2rem;" class="reveal">
+                <img src="assets/logo_white.png" alt="智联招聘" style="height:264px;width:auto;object-fit:contain;display:block;">
+            </div>
+            <!-- 主标题 -->
+            <h1 class="reveal reveal-delay-1" style="font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:800;line-height:1.15;margin-bottom:1.5rem;color:white;">
+                智联企业出海<span style="color:#FFD800;">「全球发」</span>
+            </h1>
+            <!-- 副标题 -->
+            <p class="reveal reveal-delay-2" style="font-size:clamp(1rem,1.8vw,1.3rem);color:rgba(255,255,255,0.85);max-width:480px;line-height:1.8;margin-bottom:2.5rem;">
+                一站式职位全球发布解决方案<br>覆盖全球 <span style="color:#FFD800;font-weight:700;">110+</span> 国家地区 · 联合 <span style="color:#FFD800;font-weight:700;">70+</span> 主流招聘平台
+            </p>
+            <!-- 底部标签 -->
+            <div class="reveal reveal-delay-3" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:0.5rem 1.25rem;">
+                <span style="color:rgba(255,255,255,0.9);font-size:var(--small-size);font-weight:500;">智联招聘 · 香港 · 企业出海事业部</span>
+            </div>
+            <!-- 右下角装饰元素 -->
+            <div aria-hidden="true" style="position:absolute;right:-2vw;bottom:-5vh;width:55vw;height:55vw;max-width:600px;max-height:600px;opacity:0.07;transform:rotate(-15deg);pointer-events:none;">
+                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+                    <circle cx="200" cy="200" r="180" stroke="white" stroke-width="2"/>
+                    <circle cx="200" cy="200" r="140" stroke="white" stroke-width="1.5"/>
+                    <circle cx="200" cy="200" r="100" stroke="white" stroke-width="1"/>
+                    <path d="M200 20 L200 380 M20 200 L380 200" stroke="white" stroke-width="1"/>
+                    <path d="M60 60 L340 340 M340 60 L60 340" stroke="white" stroke-width="0.8" opacity="0.6"/>
+                    <circle cx="200" cy="200" r="8" fill="white"/>
+                </svg>
+            </div>
+        </div>
+        <div class="slide-num" style="color: rgba(255,255,255,0.3);">01 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 2: CONTENTS ========== -->
+    <section class="slide slide-bg-light" data-slide="2">
+        <div class="slide-content">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem;" class="reveal">
+                <div class="section-tag">CONTENTS</div>
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain;">
+                    <span style="font-size:1.2rem; color:var(--brand-blue); font-weight:700;">×</span>
+                    <img src="assets/logo_jobstreet.png" alt="JobStreet" style="height:36px; width:auto; object-fit:contain;">
+                    <img src="assets/logo_jobsdb.png" alt="JobsDB" style="height:36px; width:auto; object-fit:contain;">
+                </div>
+            </div>
+            <h2 class="reveal reveal-delay-1" style="margin-bottom: 2rem;">目录</h2>
+            <ol class="contents-list">
+                <li class="contents-item reveal reveal-delay-1">
+                    <span class="contents-num">01</span>全球发 · 服务介绍
+                </li>
+                <li class="contents-item reveal reveal-delay-2">
+                    <span class="contents-num">02</span>服务套餐报价
+                </li>
+                <li class="contents-item reveal reveal-delay-3">
+                    <span class="contents-num">03</span>合作客户及案例
+                </li>
+                <li class="contents-item reveal reveal-delay-4">
+                    <span class="contents-num">04</span>智联企业出海服务全景图
+                </li>
+                <li class="contents-item reveal reveal-delay-5">
+                    <span class="contents-num">05</span>产品附录
+                </li>
+            </ol>
+        </div>
+        <div class="slide-num" style="color: rgba(0,0,0,0.35);">02 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 3: SECTION 01 ========== -->
+    <section class="slide slide-section" data-slide="3">
+        <img src="assets/logo_white.png" alt="智联招聘" class="section-logo reveal" style="position:absolute; top:2rem; left:2rem; max-height:min(16vh,120px); width:auto; object-fit:contain;">
+        <div class="slide-content">
+            <div class="section-num reveal">01</div>
+            <h1 class="reveal reveal-delay-1">产品服务介绍</h1>
+            <p class="reveal reveal-delay-2">PRODUCT INTRODUCTION</p>
+        </div>
+        <div class="slide-num" style="color: rgba(255,255,255,0.4);">03 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 4: OVERVIEW STATS ========== -->
+    <section class="slide slide-bg-white" data-slide="4">
+        <div class="slide-content">
+            <div class="section-tag reveal">OVERVIEW · 产品概述</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem;" class="reveal reveal-delay-1">
+                <h2>智联企业出海「全球发」</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain; opacity: 1;">
+            </div>
+            <div class="grid-5">
+                <div class="stat-box reveal reveal-delay-1">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#004BFE" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="#004BFE" stroke-width="2"/></svg>
+                    <div class="stat-number">110<span style="font-size: 0.5em;">+</span></div>
+                    <div class="stat-label">覆盖国家地区</div>
+                </div>
+                <div class="stat-box reveal reveal-delay-2">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#FFD800" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="#FFD800" stroke-width="2"/></svg>
+                    <div class="stat-number">70<span style="font-size: 0.5em;">+</span></div>
+                    <div class="stat-label">海外招聘网站</div>
+                </div>
+                <div class="stat-box reveal reveal-delay-3">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#004BFE" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#004BFE" stroke-width="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#004BFE" stroke-width="2"/></svg>
+                    <div class="stat-number">4亿<span style="font-size: 0.5em;">+</span></div>
+                    <div class="stat-label">全球人才覆盖</div>
+                </div>
+                <div class="stat-box reveal reveal-delay-4">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 20V10M12 20V4M6 20v-6" stroke="#FFD800" stroke-width="2" stroke-linecap="round"/></svg>
+                    <div class="stat-number">2亿<span style="font-size: 0.5em;">+</span></div>
+                    <div class="stat-label">全球月访问量</div>
+                </div>
+                <div class="stat-box reveal reveal-delay-5">
+                    <img src="assets/handshake_blue.png" alt="握手" style="height:clamp(2rem, 4vw, 2.8rem); width:auto;">
+                    <div class="stat-number">2000<span style="font-size: 0.5em;">+</span></div>
+                    <div class="stat-label">已服务全球雇主</div>
+                </div>
+            </div>
+            <div style="margin-top: 2rem; padding: clamp(1rem, 2vw, 1.5rem); background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--brand-blue);" class="reveal reveal-delay-5">
+                <p style="font-size: var(--body-size); color: var(--text-primary); font-weight: 500;">
+                    我们帮您将职位广告发布到目标国家的合作网站，触达当地求职者
+                </p>
+            </div>
+        </div>
+        <div class="slide-num" style="color: rgba(0,0,0,0.35);">04 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 5: ADVANTAGES ========== -->
+    <section class="slide slide-bg-light" data-slide="5">
+        <div class="slide-content">
+            <div class="section-tag reveal">ADVANTAGES · 核心优势</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.25rem;" class="reveal reveal-delay-1">
+                <h2>全球覆盖 · 本地体验</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain; opacity: 1;">
+            </div>
+            <p class="reveal reveal-delay-1" style="margin-bottom: 2.5rem; font-size: var(--small-size); color: var(--text-secondary);">Global Coverage · Local Expertise</p>
+            <div class="grid-4">
+                <div class="adv-card reveal reveal-delay-1">
+                    <div class="adv-icon-wrap"><span class="adv-num">1</span></div>
+                    <h3>本地化服务</h3>
+                    <p>中文沟通，北京时区，实时响应全球需求</p>
+                </div>
+                <div class="adv-card reveal reveal-delay-2">
+                    <div class="adv-icon-wrap"><span class="adv-num">1</span></div>
+                    <h3>专属服务经理</h3>
+                    <p>一对一全程跟进，对接无忧</p>
+                </div>
+                <div class="adv-card reveal reveal-delay-3">
+                    <div class="adv-icon-wrap"><span class="adv-num">1</span></div>
+                    <h3>合并账单付款</h3>
+                    <p>跨国全球发布统一货币结算，为您提供最便捷的支付选择</p>
+                </div>
+                <div class="adv-card reveal reveal-delay-4">
+                    <div class="adv-icon-wrap"><span class="adv-num">1</span></div>
+                    <h3>一站式服务</h3>
+                    <p>海外团队协助本地化配置与发布，避免出现违反当地劳动法律、文化信仰等合规问题的出现</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-num" style="color: rgba(0,0,0,0.35);">05 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 6: SERVICE FLOW ========== -->
+    <section class="slide slide-bg-white" data-slide="6">
+        <div class="slide-content">
+            <div class="section-tag reveal">SERVICE FLOW · 服务流程</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem;" class="reveal reveal-delay-1">
+                <h2>全流程仅需 4 步，So Easy</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain; opacity: 1;">
+            </div>
+            <div class="flow-steps">
+                <div class="flow-step reveal reveal-delay-1">
+                    <div class="step-num">1</div>
+                    <h3>准备工作</h3>
+                    <p>专业交付顾问协助对接岗位需求，进行本地化配置</p>
+                </div>
+                <div class="flow-step reveal reveal-delay-2">
+                    <div class="step-num">2</div>
+                    <h3>发布上线</h3>
+                    <p>海外顾问协助进行职位的发布上线，海外团队协助评估优化</p>
+                </div>
+                <div class="flow-step reveal reveal-delay-3">
+                    <div class="step-num">3</div>
+                    <h3>触达求职者</h3>
+                    <p>职位广告在各市场主流招聘板上精准吸引求职者</p>
+                </div>
+                <div class="flow-step reveal reveal-delay-4">
+                    <div class="step-num">4</div>
+                    <h3>简历获取</h3>
+                    <p>简历同步至专属账号，一站式管理所有投递</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-num" style="color: rgba(0,0,0,0.35);">06 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 7: COUNTRIES ========== -->
+    <section class="slide slide-bg-light" data-slide="7">
+        <div class="slide-content">
+            <div class="section-tag reveal">COVERAGE · 覆盖范围</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;" class="reveal reveal-delay-1">
+                <h2>覆盖 110+ 国家地区</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain; opacity: 1;">
+            </div>
+            <p class="reveal reveal-delay-1" style="margin-bottom: 2rem; font-size: var(--small-size);">整合全球 70+ 招聘平台合作伙伴</p>
+            <div class="countries-grid reveal reveal-delay-2">
+                <div class="country-tag">🇨🇳 中国香港</div>
+                <div class="country-tag">🇸🇬 新加坡</div>
+                <div class="country-tag">🇯🇵 日本</div>
+                <div class="country-tag">🇰🇷 韩国</div>
+                <div class="country-tag">🇦🇺 澳大利亚</div>
+                <div class="country-tag">🇳🇿 新西兰</div>
+                <div class="country-tag">🇻🇳 越南</div>
+                <div class="country-tag">🇹🇭 泰国</div>
+                <div class="country-tag">🇲🇾 马来西亚</div>
+                <div class="country-tag">🇮🇩 印度尼西亚</div>
+                <div class="country-tag">🇵🇭 菲律宾</div>
+                <div class="country-tag">🇮🇳 印度</div>
+                <div class="country-tag">🇦🇪 阿联酋</div>
+                <div class="country-tag">🇸🇦 沙特阿拉伯</div>
+                <div class="country-tag">🇬🇧 英国</div>
+                <div class="country-tag">🇩🇪 德国</div>
+                <div class="country-tag">🇫🇷 法国</div>
+                <div class="country-tag">🇺🇸 美国</div>
+                <div class="country-tag">🇨🇦 加拿大</div>
+                <div class="country-tag">🇪🇬 埃及</div>
+                <div class="country-tag">🇿🇲 赞比亚</div>
+                <div class="country-tag">🇩🇰 丹麦</div>
+                <div class="country-tag">🇭🇺 匈牙利</div>
+                <div class="country-tag">🌍 + 90 更多</div>
+            </div>
+        </div>
+        <div class="slide-num" style="color: rgba(0,0,0,0.35);">07 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 8: SECTION 02 ========== -->
+    <section class="slide slide-section" data-slide="8">
+        <img src="assets/logo_white.png" alt="智联招聘" style="position:absolute; top:2rem; left:2rem; max-height:min(16vh,120px); width:auto; object-fit:contain;">
+        <div class="slide-content">
+            <div class="section-num reveal">02</div>
+            <h1 class="reveal reveal-delay-1">服务套餐报价</h1>
+            <p class="reveal reveal-delay-2">SERVICE PACKAGE</p>
+        </div>
+        <div class="slide-num" style="color: rgba(255,255,255,0.4);">08 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 9: ASIA BASIC ========== -->
+    <section class="slide slide-bg-white" data-slide="9">
+        <div class="slide-content">
+            <div class="section-tag reveal">PACKAGE · 套餐方案</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;" class="reveal reveal-delay-1">
+                <h2>Asia 亚洲基础套餐</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain; opacity: 1;">
+            </div>
+            <p class="reveal reveal-delay-1" style="margin-bottom:1.5rem; font-size:var(--small-size); color:var(--text-secondary);">在以下国家，通过我们的合作伙伴网络，享受统一的一致价格发布职位。</p>
+
+            <!-- Country Platform Table -->
+            <table class="pkg3-table reveal reveal-delay-2">
+                <tr>
+                    <th class="label-col">国家 / 地区</th>
+                    <td class="country-cell"><span class="flag">🇸🇬</span><span class="cname">新加坡</span></td>
+                    <td class="country-cell"><span class="flag">🇮🇩</span><span class="cname">印度尼西亚</span></td>
+                    <td class="country-cell"><span class="flag">🇲🇾</span><span class="cname">马来西亚</span></td>
+                    <td class="country-cell"><span class="flag">🇵🇭</span><span class="cname">菲律宾</span></td>
+                    <td class="country-cell"><span class="flag">🇻🇳</span><span class="cname">越南</span></td>
+                    <td class="country-cell"><span class="flag">🇮🇳</span><span class="cname">印度</span></td>
+                    <td class="country-cell"><span class="flag">🇹🇭</span><span class="cname">泰国</span></td>
+                    <td class="country-cell"><span class="flag">🇭🇰</span><span class="cname">中国香港</span></td>
+                    <td class="country-cell"><span class="flag">🇰🇷</span><span class="cname">韩国</span></td>
+                    <td class="country-cell"><span class="flag">🇳🇵</span><span class="cname">尼泊尔</span></td>
+                    <td class="country-cell"><span class="flag">🇵🇰</span><span class="cname">巴基斯坦</span></td>
+                </tr>
+                <tr>
+                    <td class="label-col">目标网站</td>
+                    <td class="logo-cell" colspan="4"><img src="assets/logo_jobstreet.png" alt="JobStreet" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell"><img src="assets/logo_careerviet.png" alt="CareerViet" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell"><img src="assets/logo_naukri.png" alt="Naukri" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell" colspan="2"><img src="assets/logo_jobsdb.png" alt="JobsDB" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell"><img src="assets/logo_jobkorea.png" alt="JobKorea" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell"><img src="assets/logo_jobejee.png" alt="Jobejee" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell"><img src="assets/logo_rozee.png" alt="Rozee" style="height:26px; width:auto; object-fit:contain;"></td>
+                </tr>
+            </table>
+
+            <!-- Pricing Table -->
+            <p class="reveal reveal-delay-3" style="margin:1.5rem 0 1rem; font-size:var(--small-size); color:var(--text-secondary);">3 种套餐包含不同职位，每个套餐均可任意用于发布到上述国家。</p>
+            <table class="pricing-table reveal reveal-delay-4">
+                <tr>
+                    <th>可发布职位数</th>
+                    <th>套餐价格（港币）</th>
+                </tr>
+                <tr>
+                    <td>1 个职位</td>
+                    <td>$1,588</td>
+                </tr>
+                <tr class="featured">
+                    <td>5 个职位 · 推荐</td>
+                    <td>$7,988</td>
+                </tr>
+                <tr>
+                    <td>10 个职位</td>
+                    <td>$12,988</td>
+                </tr>
+            </table>
+            <p class="reveal" style="margin-top:0.75rem; font-size:var(--small-size); color:var(--text-secondary);">* 港币计价，费用支付到香港，支持按人民币结算</p>
+        </div>
+        <div class="slide-num" style="color:rgba(0,0,0,0.35);">09 / 23</div>
+    </section>
+    <!-- ========== SLIDE 10: ASIA PREMIUM ========== -->
+    <section class="slide slide-bg-white" data-slide="10">
+        <div class="slide-content">
+            <div class="section-tag reveal">PACKAGE · 套餐方案</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;" class="reveal reveal-delay-1">
+                <h2>APAC 亚太地区高级套餐</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain; opacity: 1;">
+            </div>
+            <p class="reveal reveal-delay-1" style="margin-bottom:1.5rem; font-size:var(--small-size); color:var(--text-secondary);">当您的需求紧急或等待主动投递难以满足要求，高级套餐增加简历搜索能力。</p>
+
+            <!-- Country Platform Table -->
+            <table class="pkg3-table reveal reveal-delay-2">
+                <tr>
+                    <th class="label-col">国家 / 地区</th>
+                    <td class="country-cell"><span class="flag">🇸🇬</span><span class="cname">新加坡</span></td>
+                    <td class="country-cell"><span class="flag">🇮🇩</span><span class="cname">印度尼西亚</span></td>
+                    <td class="country-cell"><span class="flag">🇲🇾</span><span class="cname">马来西亚</span></td>
+                    <td class="country-cell"><span class="flag">🇵🇭</span><span class="cname">菲律宾</span></td>
+                    <td class="country-cell"><span class="flag">🇦🇺</span><span class="cname">澳大利亚</span></td>
+                    <td class="country-cell"><span class="flag">🇳🇿</span><span class="cname">新西兰</span></td>
+                    <td class="country-cell"><span class="flag">🇮🇳</span><span class="cname">印度</span></td>
+                    <td class="country-cell"><span class="flag">🇹🇭</span><span class="cname">泰国</span></td>
+                    <td class="country-cell"><span class="flag">🇭🇰</span><span class="cname">中国香港</span></td>
+                    <td class="country-cell"><span class="flag">🇵🇰</span><span class="cname">巴基斯坦</span></td>
+                </tr>
+                <tr>
+                    <td class="label-col">目标网站</td>
+                    <td class="logo-cell" colspan="4"><img src="assets/logo_jobstreet.png" alt="JobStreet" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell" colspan="2"><img src="assets/logo_seek.png" alt="SEEK" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell"><img src="assets/logo_naukri.png" alt="Naukri" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell" colspan="2"><img src="assets/logo_jobsdb.png" alt="JobsDB" style="height:26px; width:auto; object-fit:contain;"></td>
+                    <td class="logo-cell"><img src="assets/logo_rozee.png" alt="Rozee" style="height:26px; width:auto; object-fit:contain;"></td>
+                </tr>
+            </table>
+
+            <!-- Pricing Table -->
+            <table class="pricing-table reveal reveal-delay-4">
+                <tr>
+                    <th>套餐内容</th>
+                    <th>套餐价格（港币）</th>
+                </tr>
+                <tr>
+                    <td>1 个职位 + 50 简历搜索</td>
+                    <td>$9,988</td>
+                </tr>
+                <tr>
+                    <td>5 个职位 + 50 简历搜索</td>
+                    <td>$18,888</td>
+                </tr>
+                <tr class="featured">
+                    <td>10 个职位 + 100 简历搜索</td>
+                    <td>$44,000</td>
+                </tr>
+            </table>
+            <p class="reveal" style="margin-top:0.75rem; font-size:var(--small-size); color:var(--text-secondary);">* 职位可发布上述任意目标国家。50个简历搜索可选择一个国家使用并需相应发布职位，100个简历搜索可选择两个国家分配使用也需要相应在两个国家发布对应职位。</p>
+        </div>
+        <div class="slide-num" style="color:rgba(0,0,0,0.35);">10 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 11: OTHER COUNTRIES ========== -->
+    <section class="slide slide-bg-white" data-slide="11">
+        <div class="slide-content">
+            <div class="section-tag reveal">PACKAGE · 套餐方案</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;" class="reveal reveal-delay-1">
+                <h2>其他国家地区定制方案</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain; opacity: 1;">
+            </div>
+            <p class="reveal reveal-delay-1" style="margin-bottom:1.5rem; font-size:var(--small-size); color:var(--text-secondary);">按需定制，部分合作伙伴介绍</p>
+            <table class="pkg3-table reveal reveal-delay-2" style="width:100%;">
+                <tr style="height:3rem;">
+                    <th class="label-col" style="background:var(--brand-blue); color:#fff; width:20%; text-align:center;">国家 / 地区</th>
+                    <th class="label-col" style="background:var(--brand-blue); color:#fff; width:20%; text-align:center;">招聘平台</th>
+                    <th class="label-col" style="background:var(--brand-blue); color:#fff; width:10%; text-align:center;">发布时长</th>
+                    <th class="label-col" style="background:var(--brand-blue); color:#fff; width:50%; text-align:center;">优势</th>
+                </tr>
+                <tr>
+                    <td class="country-cell" style="text-align:left;">🇸🇦 沙特阿拉伯 / 阿联酋</td>
+                    <td style="text-align:center;"><img src="assets/logo_bayt.png" alt="Bayt" style="height:28px; width:auto; object-fit:contain;"></td>
+                    <td style="font-size:0.85rem; text-align:center;">60 天</td>
+                    <td style="font-size:0.85rem; line-height:1.6; text-align:left; color:#000;">
+                        250 万份候选人档案<br>21% 为高级管理层，36% 为中层管理，52% 为初级职位<br>强大的筛选功能，可叠加面试服务
+                    </td>
+                </tr>
+                <tr>
+                    <td class="country-cell" style="text-align:left;">🇳🇬 尼日利亚</td>
+                    <td style="text-align:center;"><img src="assets/logo_jobberman.png" alt="Jobberman" style="height:28px; width:auto; object-fit:contain;"></td>
+                    <td style="font-size:0.85rem; text-align:center;">30 天</td>
+<td style="font-size:0.85rem; line-height:1.6; text-align:left; color:#000;">
+                        400 万+ 候选人档案<br>60% 拥有学士学历或以上
+                    </td>
+                </tr>
+                <tr>
+                    <td class="country-cell" style="text-align:left;">🇿🇲 赞比亚</td>
+                    <td style="text-align:center;"><img src="assets/logo_jobartis.png" alt="Jobartis" style="height:28px; width:auto; object-fit:contain;"></td>
+                    <td style="font-size:0.85rem; text-align:center;">60 天</td>
+                    <td style="font-size:0.85rem; line-height:1.6; text-align:left; color:#000;">
+                        70 万注册候选人<br>与赞比亚共和国政府及主要国际开发机构（联合国机构、国际 NGO、大型项目执行方）建立信任合作
+                    </td>
+                </tr>
+                <tr>
+                    <td class="country-cell" style="text-align:left;">🇹🇿 坦桑尼亚</td>
+                    <td style="text-align:center;"><img src="assets/logo_findajobinafrica.png" alt="findajobinafrica" style="height:28px; width:auto; object-fit:contain;"></td>
+                    <td style="font-size:0.85rem; text-align:center;">30 天</td>
+                    <td style="font-size:0.85rem; line-height:1.6; text-align:left; color:#000;">
+                        百万候选人档案<br>平均约 100 份/职位<br>Oxfam GB Africa、BAT、Airtel、Standard Chartered、KPMG 合作品牌
+                    </td>
+                </tr>
+                <tr>
+                    <td class="country-cell" style="text-align:left;">🇻🇳 越南</td>
+                    <td style="text-align:center;"><img src="assets/logo_careerviet2.png" alt="Careerviet" style="height:28px; width:auto; object-fit:contain;"></td>
+                    <td style="font-size:0.85rem; text-align:center;">30 天</td>
+<td style="font-size:0.85rem; line-height:1.6; text-align:left; color:#000;">
+                        5 万候选人<br>APAC 客户使用率最高
+                    </td>
+                </tr>
+                <tr>
+                    <td class="country-cell" style="text-align:left;">🇯🇵 日本</td>
+                    <td style="text-align:center;"><img src="assets/logo_daijob.png" alt="Daijob" style="height:28px; width:auto; object-fit:contain;"></td>
+                    <td style="font-size:0.85rem; text-align:center;">30 天</td>
+<td style="font-size:0.85rem; line-height:1.6; text-align:left; color:#000;">
+                        95% 双语人才<br>76% 商务英语或以上<br>约 85 万注册候选人
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="slide-num">11 / 23</div>
+    </section>
+<section class="slide slide-section" data-slide="12">
+        <img src="assets/logo_white.png" alt="智联招聘" class="section-logo reveal" style="position:absolute; top:2rem; left:2rem; max-height:min(16vh,120px); width:auto; object-fit:contain;">
+        <div class="slide-content">
+            <div class="section-num reveal">03</div>
+            <h1 class="reveal reveal-delay-1">合作案例</h1>
+            <p class="reveal reveal-delay-2">SUCCESS CASE</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:2.5rem; justify-content:center; align-items:center; padding:2rem; background:#fff;" class="reveal reveal-delay-3">
+            <img src="assets/logo_ibm.png" alt="IBM" style="height:48px; width:auto; object-fit:contain;">
+            <img src="assets/logo_sony.png" alt="SONY" style="height:48px; width:auto; object-fit:contain;">
+            <img src="assets/logo_hkexpress.png" alt="HK Express" style="height:48px; width:auto; object-fit:contain;">
+            <img src="assets/logo_jd.png" alt="JD.com" style="height:48px; width:auto; object-fit:contain;">
+            <img src="assets/logo_shell.png" alt="Shell" style="height:48px; width:auto; object-fit:contain;">
+            <img src="assets/logo_marchon.png" alt="Marchon" style="height:48px; width:auto; object-fit:contain;">
+            <img src="assets/logo_ups.png" alt="UPS" style="height:48px; width:auto; object-fit:contain;">
+            <img src="assets/logo_hitachi.png" alt="HITACHI" style="height:48px; width:auto; object-fit:contain;">
+        </div>
+        <div class="slide-num" style="color: rgba(255,255,255,0.4);">12 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 11: CASE STUDY ========== -->
+    <section class="slide slide-bg-light" data-slide="13">
+        <div class="slide-content">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;" class="reveal">
+                <div class="section-tag">CASE · 成功案例</div>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain; opacity: 1;">
+            </div>
+            <h2 class="reveal reveal-delay-1" style="margin-bottom: 2rem;">香港客户在亚太地区成功寻找人才</h2>
+            <div class="case-grid">
+                <div>
+                    <p class="reveal reveal-delay-2" style="margin-bottom: 1rem; font-size: var(--body-size); color: var(--text-primary); font-weight: 500;">
+                        客户是一家国际贸易公司，需要在不同地区招聘人员，主要负责人在香港。
+                    </p>
+                    <p class="reveal reveal-delay-3" style="margin-bottom: 1rem; font-size: var(--body-size);">
+                        客户对其他地区发布招聘广告的流程并不熟悉。当听说我们可以提供一站式全球发服务，非常兴奋。
+                    </p>
+                    <div class="divider reveal reveal-delay-4"></div>
+                    <p class="reveal reveal-delay-4" style="margin-top: 1rem; font-size: var(--body-size); color: var(--brand-blue); font-weight: 600;">
+                        客户同时在东南亚的新加坡、马来西亚、印尼、泰国、越南等地同时发布 <strong style="font-size: 1.2em;">10 个职位</strong>。在这些目标国家都收到了简历回复，并成功聘用了 5 个国家的心仪人选。
+                    </p>
+                    <p class="reveal reveal-delay-5" style="margin-top: 0.75rem; font-size: var(--body-size); color: var(--text-secondary);">
+                        客户 HRD Mr.Queenie 说："这个服务很 Fit 我们的需要，不用再费心去多个 Counties 选在哪能找到 Talent。"
+                    </p>
+                </div>
+                <div>
+                    <img src="assets/case_queenie.jpg" alt="客户案例" class="case-image reveal reveal-delay-3" style="width:100%; max-height:min(45vh,360px); object-fit:cover; border-radius:8px;">
+                </div>
+            </div>
+        </div>
+        <div class="slide-num">13 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 12: SECTION 04 ========== -->
+    <section class="slide slide-section" data-slide="14">
+        <img src="assets/logo_white.png" alt="智联招聘" style="position:absolute; top:2rem; left:2rem; max-height:min(16vh,120px); width:auto; object-fit:contain;">
+        <div class="slide-content">
+            <div class="section-num reveal">04</div>
+            <h1 class="reveal reveal-delay-1">企业出海服务概览</h1>
+            <p class="reveal reveal-delay-2">GLOBAL RECRUITMENT SOLUTION</p>
+        </div>
+        <div class="slide-num" style="color: rgba(255,255,255,0.4);">14 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 13: SERVICE MATRIX ========== -->
+    <section class="slide slide-bg-white" data-slide="15">
+        <div class="slide-content" style="padding: 1.2rem 2rem 0.5rem;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;" class="reveal">
+                <div class="section-tag">— FULL SERVICE · 全方位服务</div>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px; width:auto; object-fit:contain; opacity: 1;">
+            </div>
+            <h2 class="reveal reveal-delay-1" style="margin-bottom: 0.8rem; font-size: clamp(1.6rem, 3vw, 2.2rem);">智联招聘企业出海服务</h2>
+
+            <!-- 4列产品矩阵 -->
+            <div class="pmatrix reveal reveal-delay-2">
+
+                <!-- 第1列：人才维度 -->
+                <div class="pmatrix-col pmatrix-label-col">
+                    <div class="pmatrix-col-header">全球人才覆盖</div>
+                    <div class="pmatrix-label-box">
+                        <div class="pmatrix-label-title">金领</div>
+                        <div class="pmatrix-label-sub">企业高管</div>
+                    </div>
+                    <div class="pmatrix-label-box">
+                        <div class="pmatrix-label-title">白领</div>
+                        <div class="pmatrix-label-sub">销售/职能/技术</div>
+                    </div>
+                    <div class="pmatrix-label-box">
+                        <div class="pmatrix-label-title">蓝领</div>
+                        <div class="pmatrix-label-sub">服务员/工人</div>
+                    </div>
+                </div>
+
+                <!-- 第2列：全球发 -->
+                <div class="pmatrix-col">
+                    <div class="pmatrix-col-header">
+                        <div class="pmatrix-col-title">全球发</div>
+                        <div class="pmatrix-col-sub">曝光类 · 面向全球发布，本地人才触达</div>
+                    </div>
+                    <div class="pmatrix-col-body">
+                        <div class="pmatrix-item">全球职位一键发布</div>
+                        <div class="pmatrix-item">简历一站收集</div>
+                        <div class="pmatrix-item">海外简历搜索</div>
+                        <div class="pmatrix-item">海外雇主品牌联动</div>
+                    </div>
+                </div>
+
+                <!-- 第3列：全球猎头 -->
+                <div class="pmatrix-col">
+                    <div class="pmatrix-col-header">
+                        <div class="pmatrix-col-title">全球猎头</div>
+                        <div class="pmatrix-col-sub">效果类 · 为效果付费，巡猎目标人才</div>
+                    </div>
+                    <div class="pmatrix-col-body">
+                        <div class="pmatrix-item">海外高管猎头</div>
+                        <div class="pmatrix-item">全球猎头到岗</div>
+                        <div class="pmatrix-item">跨境蓝领招募</div>
+                        <div class="pmatrix-item">海外派遣猎头</div>
+                    </div>
+                </div>
+
+                <!-- 第4列：雇主品牌 -->
+                <div class="pmatrix-col">
+                    <div class="pmatrix-col-header">
+                        <div class="pmatrix-col-title">雇主品牌</div>
+                        <div class="pmatrix-col-sub">品牌文化 · 打造全球雇主影响力，提升海外人才吸引力</div>
+                    </div>
+                    <div class="pmatrix-col-body">
+                        <div class="pmatrix-item">雇主品牌方案定制</div>
+                        <div class="pmatrix-item">海外雇主品牌宣传</div>
+                        <div class="pmatrix-item">APAC最佳雇主参选</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部配套服务 -->
+            <div class="psupport reveal reveal-delay-3">
+                <div class="psupport-title">出海配套服务 · 全链路覆盖</div>
+                <div class="psupport-grid">
+                    <div class="psupport-item"><span class="psupport-icon" data-icon="globe"></span> 海外公司架构设计</div>
+                    <div class="psupport-item"><span class="psupport-icon" data-icon="doc"></span> 海外公司注册</div>
+                    <div class="psupport-item"><span class="psupport-icon" data-icon="screen"></span> 对外投资ODI备案</div>
+                    <div class="psupport-item"><span class="psupport-icon" data-icon="bank"></span> 银行账户开立</div>
+                    <div class="psupport-item"><span class="psupport-icon" data-icon="person"></span> EOR名义雇主</div>
+                    <div class="psupport-item"><span class="psupport-icon" data-icon="visa"></span> 海外工作签证</div>
+                    <div class="psupport-item"><span class="psupport-icon" data-icon="chart"></span> 海外财务记账</div>
+                    <div class="psupport-item"><span class="psupport-icon" data-icon="help"></span> 海外收入咨询</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-num">15 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 14: THANK YOU ========== -->
+    <section class="slide slide-thanks" data-slide="16">
+        <img src="assets/logo_white.png" alt="智联招聘" style="position:absolute; top:2rem; left:2rem; max-height:min(16vh,120px); width:auto; object-fit:contain;">
+        <div class="slide-content">
+            <h1 class="text-white reveal reveal-delay-1" style="font-size: clamp(2rem, 6vw, 4rem); margin-bottom: 1rem;">谢谢观看，期待合作</h1>
+            <p class="reveal reveal-delay-2" style="color: rgba(255,255,255,0.7); font-size: var(--h3-size);">THANK YOU</p>
+            <div class="divider divider-yellow reveal reveal-delay-3" style="margin: 1.5rem auto;"></div>
+            <div class="contact-info reveal reveal-delay-4">
+                <span style="font-weight: 600; color: white;">智联招聘国际有限公司</span>
+                <span>www.zhaopin.com.hk</span>
+                <span>香港港岛中西区上环文咸东街 50 号 Strand 50 8层 2</span>
+                <span>Stan.zhang@zhaopin.com.hk</span>
+            </div>
+        </div>
+        <div class="slide-num" style="color: rgba(255,255,255,0.4);">16 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 15: APPENDIX DIVIDER ========== -->
+    <section class="slide slide-section" data-slide="17">
+        <img src="assets/logo_white.png" alt="智联招聘" style="position:absolute; top:2rem; left:2rem; max-height:min(16vh,120px); width:auto; object-fit:contain;">
+        <div class="slide-content">
+            <div class="section-num reveal">05</div>
+            <h1 class="reveal reveal-delay-1">附录</h1>
+            <p class="reveal reveal-delay-2">APPENDIX</p>
+        </div>
+        <div class="slide-num" style="color: rgba(255,255,255,0.4);">17 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 18: APAC PARTNER ADVANTAGES ========== -->
+    <section class="slide slide-bg-white" data-slide="18">
+        <div class="slide-content">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;" class="reveal">
+                <div class="section-tag">APPENDIX · APAC Partner Advantages</div>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px;width:auto;object-fit:contain;opacity:1;">
+            </div>
+            <h2 class="reveal" style="margin-bottom:1.5rem;">合作平台优势</h2>
+
+            <!-- 8国优势网格：2行4列 -->
+            <div class="partner-grid reveal reveal-delay-2">
+                <div class="partner-card">
+                    <div class="partner-country">🇦🇺 澳大利亚</div>
+                    <div class="partner-list">澳大利亚访问量最大招聘平台，5000万+候选人档案</div>
+                    <div class="partner-list">候选人上岗率是竞争对手的4倍</div>
+                    <div class="partner-list">25年+运营经验，政府机构信赖合作伙伴</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-country">🇳🇿 新西兰</div>
+                    <div class="partner-list">候选人找到工作的可能性提升3.5倍</div>
+                    <div class="partner-list">候选人覆盖广泛——涵盖各专业领域和职业层级</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-country">🇸🇬 新加坡</div>
+                    <div class="partner-list">覆盖全行业300万候选人档案</div>
+                    <div class="partner-list">75%候选人拥有5年以上工作经验</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-country">🇭🇰 中国香港</div>
+                    <div class="partner-list">300万候选人档案（2026年劳动人口366万）</div>
+                    <div class="partner-list">「紧急招聘徽章」+自动化背景核查</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-country">🇲🇾 马来西亚</div>
+                    <div class="partner-list">候选人找到工作的可能性提升2.7倍</div>
+                    <div class="partner-list">快速迈向高收入知识型经济</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-country">🇮🇩 印度尼西亚</div>
+                    <div class="partner-list">候选人找到工作的可能性提升1.6倍</div>
+                    <div class="partner-list">劳动人口快速增长（中位年龄约30岁）</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-country">🇵🇭 菲律宾</div>
+                    <div class="partner-list">1200万候选人档案</div>
+                    <div class="partner-list">访问量是第二名竞争对手的1.5倍</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-country">🇹🇭 泰国</div>
+                    <div class="partner-list">可触达当地最大候选人资源池</div>
+                    <div class="partner-list">「发展中市场」特征：候选人注重机会与探索</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-num">18 / 23</div>
+    </section>
+
+    <!-- ========== SLIDE 19: APAC MARKET ========== -->
+    <section class="slide slide-bg-white" data-slide="19">
+        <div class="slide-content" style="overflow:hidden;">
+            <div class="section-tag reveal">APPENDIX · APAC 市场</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;" class="reveal reveal-delay-1">
+                <h2>APAC 市场就业情况摘要</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px;width:auto;object-fit:contain;">
+            </div>
+            <div style="display:grid;grid-template-columns:155px 1fr;gap:1.25rem;height:calc(100% - 6rem);">
+                <div class="reveal" style="overflow-y:auto;display:flex;flex-direction:column;gap:0.3rem;">
+                    <div class="country-btn active" id="p19btn-0" onclick="切换国家P19(0)">🇭🇰 香港</div>
+                    <div class="country-btn" id="p19btn-1" onclick="切换国家P19(1)">🇸🇬 新加坡</div>
+                    <div class="country-btn" id="p19btn-2" onclick="切换国家P19(2)">🇲🇾 马来西亚</div>
+                    <div class="country-btn" id="p19btn-3" onclick="切换国家P19(3)">🇹🇭 泰国</div>
+                    <div class="country-btn" id="p19btn-4" onclick="切换国家P19(4)">🇵🇭 菲律宾</div>
+                    <div class="country-btn" id="p19btn-5" onclick="切换国家P19(5)">🇮🇩 印尼</div>
+                    <div class="country-btn" id="p19btn-6" onclick="切换国家P19(6)">🇦🇺 澳大利亚</div>
+                    <div class="country-btn" id="p19btn-7" onclick="切换国家P19(7)">🇳🇿 新西兰</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:1rem;overflow:hidden;" class="reveal reveal-delay-1">
+                    <div style="background:#EEF4FF;border-radius:12px;padding:1.25rem 1.5rem;border-left:4px solid var(--brand-blue);">
+                        <div style="font-size:var(--small-size);color:var(--text-secondary);margin-bottom:0.75rem;font-weight:600;">关键指标</div>
+                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+                            <div><div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">失业率</div><div id="p19-unemp" style="font-size:var(--body-size);font-weight:700;color:var(--brand-blue);"></div></div>
+                            <div><div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">劳动力参与率</div><div id="p19-part" style="font-size:var(--body-size);font-weight:700;color:var(--brand-blue);"></div></div>
+                            <div><div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">市场紧张度</div><div id="p19-tight" style="font-size:var(--body-size);font-weight:700;color:var(--brand-blue);"></div></div>
+                        </div>
+                    </div>
+                    <div style="background:#F0FFF4;border-radius:12px;padding:1.25rem 1.5rem;border-left:4px solid #16a34a;flex:1;overflow-y:auto;">
+                        <div style="font-size:var(--small-size);color:var(--text-secondary);margin-bottom:0.75rem;font-weight:600;">行业动态</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+                            <div><div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">主要招聘行业</div><div id="p19-hiring" style="font-size:var(--small-size);color:var(--text-primary);line-height:1.5;"></div></div>
+                            <div><div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">收缩/走弱行业</div><div id="p19-shrink" style="font-size:var(--small-size);color:#dc2626;line-height:1.5;"></div></div>
+                            <div><div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">紧缺技能与岗位</div><div id="p19-skill" style="font-size:var(--small-size);color:var(--text-primary);line-height:1.5;"></div></div>
+                            <div><div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">薪资水平与趋势</div><div id="p19-salary" style="font-size:var(--small-size);color:var(--text-primary);line-height:1.5;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-num">19 / 23</div>
+        <script>
+        var apac_data=[
+            {unemp:"约 3.2%",part:"约 57%",tight:"专业人才偏紧",hiring:"金融服务、专业服务、医疗健康",shrink:"建筑、餐饮、传统零售",skill:"金融科技、合规、AI/数据、医疗专业",salary:"薪资水平高，增长温和，技能溢价明显"},
+            {unemp:"约 2.0%",part:"约 67–68%",tight:"非常紧张",hiring:"金融、科技、医疗、专业服务",shrink:"文职、低附加值零售",skill:"网络安全、AI、云计算、金融科技",salary:"薪资水平高，年增约 3–4%"},
+            {unemp:"约 3.1–3.3%",part:"约 70.5%",tight:"大体平衡",hiring:"服务业、制造业、建筑业",shrink:"采矿与采石",skill:"半熟练岗位、数字技能、物流",salary:"中等薪资，温和增长"},
+            {unemp:"约 1.0–1.5%",part:"约 66%",tight:"表面宽松",hiring:"制造业、服务业、旅游酒店",shrink:"汽车、房地产、电信",skill:"AI相关岗位、物流、服务运营",salary:"薪资偏低，增长乏力"},
+            {unemp:"约 3.8%",part:"约 63–65%",tight:"季节性紧张",hiring:"服务业、BPO、零售、农业",shrink:"制造业",skill:"客服、IT、BPO、医疗",salary:"薪资偏低至中等，逐步上升"},
+            {unemp:"约 4.8–5.0%",part:"约 69%",tight:"偏宽松",hiring:"农业、贸易、制造业",shrink:"正式文职、部分白领",skill:"销售、运营、入门级科技",salary:"薪资偏低至中等，增长停滞"},
+            {unemp:"约 4.3–4.5%",part:"约 67%",tight:"技术岗紧张",hiring:"医疗健康、专业服务、采矿、科技",shrink:"零售、行政文职",skill:"医护人员、工程师、软件人才",salary:"薪资水平高，约 3% 增长"},
+            {unemp:"约 5.3–5.4%",part:"约 70–71%",tight:"转松",hiring:"医疗、建筑、技工、IT",shrink:"零售、可选消费服务",skill:"技工、医疗、IT",salary:"薪资水平高，增速放缓"}
+        ];
+        function 切换国家P19(idx){
+            var d=apac_data[idx];
+            document.getElementById('p19-unemp').textContent=d.unemp;
+            document.getElementById('p19-part').textContent=d.part;
+            document.getElementById('p19-tight').textContent=d.tight;
+            document.getElementById('p19-hiring').textContent=d.hiring;
+            document.getElementById('p19-shrink').textContent=d.shrink;
+            document.getElementById('p19-skill').textContent=d.skill;
+            document.getElementById('p19-salary').textContent=d.salary;
+            document.querySelectorAll('[id^="p19btn-"]').forEach(function(b,i){
+                if(i===idx){b.classList.add('active');b.style.background='#004BFE';b.style.color='white';}
+                else{b.classList.remove('active');b.style.background='#f5f7fa';b.style.color='var(--text-primary)';}
+            });
+        }
+        切换国家P19(0);
+        </script>
+    </section>
+
+    <section class="slide slide-bg-light" data-slide="20">
+        <div class="slide-content" style="overflow:hidden;">
+            <div class="section-tag reveal">APPENDIX · 简历库搜索样例</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;" class="reveal reveal-delay-1">
+                <h2>越南 CareerViet 简历库为例</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px;width:auto;object-fit:contain;">
+            </div>
+            <div style="display:grid;grid-template-columns:320px 1fr;gap:1.5rem;height:calc(100% - 6rem);align-items:center;">
+                <!-- 左侧：步骤切换区 -->
+                <div style="display:flex;flex-direction:column;gap:0.75rem;" class="reveal">
+                    <div class="cv-step active" id="cv-step-0" onclick="切换CV步骤(0)">
+                        <div class="cv-step-num">01</div>
+                        <div class="cv-step-content">
+                            <h3>选择地区与关键词</h3>
+                            <p>在 CareerViet 平台选择越南目标地区，输入职位关键词与语言要求</p>
+                        </div>
+                    </div>
+                    <div class="cv-step" id="cv-step-1" onclick="切换CV步骤(1)">
+                        <div class="cv-step-num">02</div>
+                        <div class="cv-step-content">
+                            <h3>筛选人才并预览</h3>
+                            <p>根据工作年限、学历、行业等维度筛选合适人才，点击预览完整简历</p>
+                        </div>
+                    </div>
+                    <div class="cv-step" id="cv-step-2" onclick="切换CV步骤(2)">
+                        <div class="cv-step-num">03</div>
+                        <div class="cv-step-content">
+                            <h3>下载或导出联系</h3>
+                            <p>批量下载简历或直接获取联系方式，导入智联系统开始沟通</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 右侧：配图区 -->
+                <div style="display:flex;align-items:center;justify-content:center;background:#f0f4ff;border-radius:12px;overflow:hidden;" class="reveal reveal-delay-1">
+                    <div id="cv-img-0" class="cv-img active"><img src="assets/cv-step1.png" alt="步骤1" style="width:100%;height:100%;object-fit:contain;"></div>
+                    <div id="cv-img-1" class="cv-img"><img src="assets/cv-step2.png" alt="步骤2" style="width:100%;height:100%;object-fit:contain;display:none;"></div>
+                    <div id="cv-img-2" class="cv-img"><img src="assets/cv-step3.png" alt="步骤3" style="width:100%;height:100%;object-fit:contain;display:none;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-num">20 / 23</div>
+        <script>
+        function 切换CV步骤(idx){
+            // 切换步骤高亮
+            document.querySelectorAll('.cv-step').forEach(function(s,i){
+                if(i===idx){s.classList.add('active');}
+                else{s.classList.remove('active');}
+            });
+            // 切换图片
+            document.querySelectorAll('.cv-img').forEach(function(img,i){
+                img.style.display=i===idx?'flex':'none';
+                img.querySelector('img').style.display=i===idx?'block':'none';
+            });
+        }
+        </script>
+        <style>
+        .cv-step{display:flex;gap:1rem;padding:1rem 1.25rem;border-radius:10px;border:1.5px solid #e5e7eb;cursor:pointer;transition:all 0.2s;}
+        .cv-step.active{border-color:#004BFE;background:#eff6ff;}
+        .cv-step-num{font-size:1.5rem;font-weight:800;color:#004BFE;opacity:0.4;min-width:40px;line-height:1;}
+        .cv-step.active .cv-step-num{opacity:1;}
+        .cv-step h3{font-size:var(--body-size);font-weight:600;margin:0 0 0.25rem;color:var(--text-primary);}
+        .cv-step p{font-size:var(--small-size);color:var(--text-secondary);margin:0;line-height:1.5;}
+        .cv-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+        </style>
+    </section>
+
+    <!-- Slides 19-30: Market profiles -->
+    <section class="slide slide-bg-white" data-slide="21">
+        <div class="slide-content" style="overflow:hidden;">
+            <div class="section-tag reveal">APPENDIX · 全球服务覆盖</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;" class="reveal reveal-delay-1">
+                <h2>121个国家和地区服务能力</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px;width:auto;object-fit:contain;">
+            </div>
+            <div style="display:grid;grid-template-columns:100px 1fr;gap:1.25rem;height:calc(100% - 5.5rem);">
+                <div class="reveal" style="display:flex;flex-direction:column;gap:0.35rem;">
+                    <div class="country-btn active" id="s21btn-0" onclick="筛选国家S21(0)">全部 <span id="s21cnt-0" style="font-size:0.7rem;opacity:0.7;"></span></div>
+                    <div class="country-btn" id="s21btn-1" onclick="筛选国家S21(1)">🌏 亚太 <span id="s21cnt-1" style="font-size:0.7rem;opacity:0.7;"></span></div>
+                    <div class="country-btn" id="s21btn-2" onclick="筛选国家S21(2)">🇪🇺 欧洲 <span id="s21cnt-2" style="font-size:0.7rem;opacity:0.7;"></span></div>
+                    <div class="country-btn" id="s21btn-3" onclick="筛选国家S21(3)">🌎 美洲 <span id="s21cnt-3" style="font-size:0.7rem;opacity:0.7;"></span></div>
+                    <div class="country-btn" id="s21btn-4" onclick="筛选国家S21(4)">🏛️ 中东 <span id="s21cnt-4" style="font-size:0.7rem;opacity:0.7;"></span></div>
+                    <div class="country-btn" id="s21btn-5" onclick="筛选国家S21(5)">🌍 非洲 <span id="s21cnt-5" style="font-size:0.7rem;opacity:0.7;"></span></div>
+                </div>
+                <div style="overflow-y:auto;border:1px solid #e5e7eb;border-radius:8px;" class="reveal reveal-delay-1">
+                    <table style="width:100%;border-collapse:collapse;font-size:0.78rem;min-width:500px;">
+                        <thead>
+                            <tr style="background:#004BFE;color:white;">
+                                <th style="padding:0.6rem 0.75rem;text-align:left;font-weight:600;position:sticky;top:0;background:#004BFE;">国家/地区</th>
+                                <th style="padding:0.6rem 0.75rem;text-align:left;font-weight:600;position:sticky;top:0;background:#004BFE;">英文名</th>
+                                <th style="padding:0.6rem 0.75rem;text-align:center;font-weight:600;position:sticky;top:0;background:#004BFE;width:90px;">职位发布</th>
+                                <th style="padding:0.6rem 0.75rem;text-align:center;font-weight:600;position:sticky;top:0;background:#004BFE;width:90px;">简历库搜索</th>
+                            </tr>
+                        </thead>
+                        <tbody id="s21-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="slide-num">21 / 23</div>
+        <script>
+        var 全球发数据 = [
+            {cn:"澳大利亚",en:"Australia",job:true,res:true,reg:"亚太"},
+            {cn:"香港",en:"Hong Kong",job:true,res:true,reg:"亚太"},
+            {cn:"印度",en:"India",job:true,res:true,reg:"亚太"},
+            {cn:"印度尼西亚",en:"Indonesia",job:true,res:true,reg:"亚太"},
+            {cn:"日本",en:"Japan",job:true,res:false,reg:"亚太"},
+            {cn:"马来西亚",en:"Malaysia",job:true,res:true,reg:"亚太"},
+            {cn:"缅甸",en:"Myanmar",job:true,res:false,reg:"亚太"},
+            {cn:"尼泊尔",en:"Nepal",job:true,res:false,reg:"亚太"},
+            {cn:"新西兰",en:"New Zealand",job:true,res:true,reg:"亚太"},
+            {cn:"巴基斯坦",en:"Pakistan",job:true,res:true,reg:"亚太"},
+            {cn:"菲律宾",en:"Philippines",job:true,res:true,reg:"亚太"},
+            {cn:"新加坡",en:"Singapore",job:true,res:true,reg:"亚太"},
+            {cn:"韩国",en:"South Korea",job:true,res:false,reg:"亚太"},
+            {cn:"泰国",en:"Thailand",job:true,res:true,reg:"亚太"},
+            {cn:"阿尔巴尼亚",en:"Albania",job:true,res:true,reg:"欧洲"},
+            {cn:"奥地利",en:"Austria",job:true,res:false,reg:"欧洲"},
+            {cn:"比利时",en:"Belgium",job:true,res:false,reg:"欧洲"},
+            {cn:"波黑",en:"Bosnia & Herzegovina",job:true,res:false,reg:"欧洲"},
+            {cn:"保加利亚",en:"Bulgaria",job:true,res:false,reg:"欧洲"},
+            {cn:"克罗地亚",en:"Croatia",job:true,res:true,reg:"欧洲"},
+            {cn:"捷克",en:"Czech Republic",job:true,res:true,reg:"欧洲"},
+            {cn:"丹麦",en:"Denmark",job:true,res:false,reg:"欧洲"},
+            {cn:"爱沙尼亚",en:"Estonia",job:true,res:true,reg:"欧洲"},
+            {cn:"芬兰",en:"Finland",job:true,res:false,reg:"欧洲"},
+            {cn:"法国",en:"France",job:true,res:false,reg:"欧洲"},
+            {cn:"德国",en:"Germany",job:true,res:false,reg:"欧洲"},
+            {cn:"希腊",en:"Greece",job:true,res:false,reg:"欧洲"},
+            {cn:"匈牙利",en:"Hungary",job:true,res:true,reg:"欧洲"},
+            {cn:"爱尔兰",en:"Ireland",job:true,res:false,reg:"欧洲"},
+            {cn:"科索沃",en:"Kosovo",job:true,res:true,reg:"欧洲"},
+            {cn:"拉脱维亚",en:"Latvia",job:true,res:true,reg:"欧洲"},
+            {cn:"立陶宛",en:"Lithuania",job:true,res:true,reg:"欧洲"},
+            {cn:"卢森堡",en:"Luxembourg",job:true,res:true,reg:"欧洲"},
+            {cn:"荷兰",en:"Netherlands",job:true,res:false,reg:"欧洲"},
+            {cn:"北马其顿",en:"North Macedonia",job:true,res:false,reg:"欧洲"},
+            {cn:"波兰",en:"Poland",job:true,res:false,reg:"欧洲"},
+            {cn:"葡萄牙",en:"Portugal",job:true,res:true,reg:"欧洲"},
+            {cn:"罗马尼亚",en:"Romania",job:true,res:true,reg:"欧洲"},
+            {cn:"塞尔维亚",en:"Serbia",job:true,res:false,reg:"欧洲"},
+            {cn:"斯洛伐克",en:"Slovakia",job:true,res:true,reg:"欧洲"},
+            {cn:"斯洛文尼亚",en:"Slovenia",job:true,res:false,reg:"欧洲"},
+            {cn:"西班牙",en:"Spain",job:true,res:true,reg:"欧洲"},
+            {cn:"瑞典",en:"Sweden",job:true,res:false,reg:"欧洲"},
+            {cn:"瑞士",en:"Switzerland",job:true,res:false,reg:"欧洲"},
+            {cn:"土耳其",en:"Turkey",job:false,res:true,reg:"欧洲"},
+            {cn:"英国",en:"United Kingdom",job:false,res:true,reg:"欧洲"},
+            {cn:"安圭拉",en:"Anguilla",job:true,res:true,reg:"美洲"},
+            {cn:"安提瓜和巴布达",en:"Antigua & Barbuda",job:true,res:false,reg:"美洲"},
+            {cn:"阿根廷",en:"Argentina",job:true,res:true,reg:"美洲"},
+            {cn:"巴哈马",en:"Bahamas",job:true,res:true,reg:"美洲"},
+            {cn:"巴巴多斯",en:"Barbados",job:true,res:true,reg:"美洲"},
+            {cn:"百慕大",en:"Bermuda",job:true,res:true,reg:"美洲"},
+            {cn:"英属维尔京群岛",en:"British Virgin Islands",job:true,res:true,reg:"美洲"},
+            {cn:"加拿大",en:"Canada",job:true,res:false,reg:"美洲"},
+            {cn:"开曼群岛",en:"Cayman Islands",job:true,res:true,reg:"美洲"},
+            {cn:"智利",en:"Chile",job:true,res:true,reg:"美洲"},
+            {cn:"哥斯达黎加",en:"Costa Rica",job:true,res:true,reg:"美洲"},
+            {cn:"多米尼克",en:"Dominica",job:true,res:true,reg:"美洲"},
+            {cn:"多米尼加共和国",en:"Dominican Republic",job:true,res:true,reg:"美洲"},
+            {cn:"厄瓜多尔",en:"Ecuador",job:true,res:true,reg:"美洲"},
+            {cn:"萨尔瓦多",en:"El Salvador",job:true,res:true,reg:"美洲"},
+            {cn:"格林纳达",en:"Grenada",job:true,res:true,reg:"美洲"},
+            {cn:"危地马拉",en:"Guatemala",job:true,res:true,reg:"美洲"},
+            {cn:"几内亚比绍",en:"Guinea-Bissau",job:true,res:false,reg:"美洲"},
+            {cn:"圭亚那",en:"Guyana",job:true,res:true,reg:"美洲"},
+            {cn:"洪都拉斯",en:"Honduras",job:true,res:true,reg:"美洲"},
+            {cn:"牙买加",en:"Jamaica",job:true,res:true,reg:"美洲"},
+            {cn:"蒙特塞拉特",en:"Montserrat",job:true,res:true,reg:"美洲"},
+            {cn:"尼加拉瓜",en:"Nicaragua",job:true,res:true,reg:"美洲"},
+            {cn:"巴拿马",en:"Panama",job:true,res:true,reg:"美洲"},
+            {cn:"秘鲁",en:"Peru",job:true,res:true,reg:"美洲"},
+            {cn:"圣基茨和尼维斯",en:"Saint Kitts & Nevis",job:true,res:false,reg:"美洲"},
+            {cn:"圣卢西亚",en:"Saint Lucia",job:true,res:true,reg:"美洲"},
+            {cn:"圣文森特和格林纳丁斯",en:"Saint Vincent & Grenadines",job:true,res:false,reg:"美洲"},
+            {cn:"特立尼达和多巴哥",en:"Trinidad & Tobago",job:true,res:false,reg:"美洲"},
+            {cn:"委内瑞拉",en:"Venezuela",job:false,res:true,reg:"美洲"},
+            {cn:"巴林",en:"Bahrain",job:true,res:true,reg:"中东"},
+            {cn:"埃及",en:"Egypt",job:true,res:true,reg:"中东"},
+            {cn:"伊拉克",en:"Iraq",job:true,res:true,reg:"中东"},
+            {cn:"以色列",en:"Israel",job:true,res:false,reg:"中东"},
+            {cn:"约旦",en:"Jordan",job:true,res:true,reg:"中东"},
+            {cn:"科威特",en:"Kuwait",job:true,res:true,reg:"中东"},
+            {cn:"黎巴嫩",en:"Lebanon",job:true,res:true,reg:"中东"},
+            {cn:"阿曼",en:"Oman",job:true,res:true,reg:"中东"},
+            {cn:"卡塔尔",en:"Qatar",job:true,res:true,reg:"中东"},
+            {cn:"沙特阿拉伯",en:"Saudi Arabia",job:true,res:true,reg:"中东"},
+            {cn:"阿联酋",en:"United Arab Emirates",job:false,res:true,reg:"中东"},
+            {cn:"阿尔及利亚",en:"Algeria",job:true,res:true,reg:"非洲"},
+            {cn:"安哥拉",en:"Angola",job:true,res:true,reg:"非洲"},
+            {cn:"贝宁",en:"Benin",job:true,res:false,reg:"非洲"},
+            {cn:"布隆迪",en:"Burundi",job:true,res:false,reg:"非洲"},
+            {cn:"喀麦隆",en:"Cameroon",job:true,res:false,reg:"非洲"},
+            {cn:"中非共和国",en:"Central African Republic",job:true,res:false,reg:"非洲"},
+            {cn:"乍得",en:"Chad",job:true,res:false,reg:"非洲"},
+            {cn:"刚果（金）",en:"Congo (DRC)",job:true,res:false,reg:"非洲"},
+            {cn:"吉布提",en:"Djibouti",job:true,res:false,reg:"非洲"},
+            {cn:"赤道几内亚",en:"Equatorial Guinea",job:true,res:false,reg:"非洲"},
+            {cn:"埃塞俄比亚",en:"Ethiopia",job:true,res:false,reg:"非洲"},
+            {cn:"加蓬",en:"Gabon",job:true,res:false,reg:"非洲"},
+            {cn:"冈比亚",en:"Gambia",job:true,res:false,reg:"非洲"},
+            {cn:"加纳",en:"Ghana",job:true,res:false,reg:"非洲"},
+            {cn:"几内亚",en:"Guinea",job:true,res:false,reg:"非洲"},
+            {cn:"科特迪瓦",en:"Ivory Coast",job:true,res:false,reg:"非洲"},
+            {cn:"肯尼亚",en:"Kenya",job:true,res:false,reg:"非洲"},
+            {cn:"利比里亚",en:"Liberia",job:true,res:false,reg:"非洲"},
+            {cn:"马达加斯加",en:"Madagascar",job:true,res:false,reg:"非洲"},
+            {cn:"马拉维",en:"Malawi",job:true,res:false,reg:"非洲"},
+            {cn:"马里",en:"Mali",job:true,res:false,reg:"非洲"},
+            {cn:"毛里塔尼亚",en:"Mauritania",job:true,res:false,reg:"非洲"},
+            {cn:"毛里求斯",en:"Mauritius",job:true,res:false,reg:"非洲"},
+            {cn:"摩洛哥",en:"Morocco",job:true,res:true,reg:"非洲"},
+            {cn:"尼日尔",en:"Niger",job:true,res:false,reg:"非洲"},
+            {cn:"尼日利亚",en:"Nigeria",job:true,res:false,reg:"非洲"},
+            {cn:"卢旺达",en:"Rwanda",job:true,res:false,reg:"非洲"},
+            {cn:"塞内加尔",en:"Senegal",job:true,res:false,reg:"非洲"},
+            {cn:"塞拉利昂",en:"Sierra Leone",job:true,res:false,reg:"非洲"},
+            {cn:"南非",en:"South Africa",job:true,res:false,reg:"非洲"},
+            {cn:"坦桑尼亚",en:"Tanzania",job:true,res:false,reg:"非洲"},
+            {cn:"多哥",en:"Togo",job:true,res:false,reg:"非洲"},
+            {cn:"利比亚",en:"Libya",job:false,res:true,reg:"非洲"},
+            {cn:"突尼斯",en:"Tunisia",job:false,res:true,reg:"非洲"}
+        ];
+        function 渲染国家S21(data){
+            var tbody=document.getElementById('s21-tbody');
+            tbody.innerHTML='';
+            data.forEach(function(c,i){
+                var tr=document.createElement('tr');
+                tr.style.background=i%2===0?'#ffffff':'#f9fafb';
+                tr.style.borderBottom='1px solid #f3f4f6';
+                var jk=c.job?'<span style="color:#22c55e;font-weight:bold;">✓</span>':'<span style="color:#ef4444;font-weight:bold;">×</span>';
+                var rk=c.res?'<span style="color:#22c55e;font-weight:bold;">✓</span>':'<span style="color:#ef4444;font-weight:bold;">×</span>';
+                tr.innerHTML='<td style="padding:0.45rem 0.75rem;">'+c.cn+'</td><td style="padding:0.45rem 0.75rem;color:#6b7280;">'+c.en+'</td><td style="padding:0.45rem 0.75rem;text-align:center;">'+jk+'</td><td style="padding:0.45rem 0.75rem;text-align:center;">'+rk+'</td>';
+                tbody.appendChild(tr);
+            });
+        }
+        function 筛选国家S21(idx){
+            var maps={0:'全部',1:'亚太',2:'欧洲',3:'美洲',4:'中东',5:'非洲'};
+            var reg=maps[idx];
+            var filtered=reg==='全部'?全球发数据:全球发数据.filter(function(c){return c.reg===reg;});
+            渲染国家S21(filtered);
+            document.querySelectorAll('[id^="s21btn-"]').forEach(function(b,i){
+                if(i===idx){b.classList.add('active');b.style.background='#004BFE';b.style.color='white';}
+                else{b.classList.remove('active');b.style.background='#f5f7fa';b.style.color='var(--text-primary)';}
+            });
+        }
+        // 渲染各区域计数
+        var regions_map={'全部':全球发数据,'亚太':全球发数据.filter(function(c){return c.reg==='亚太';}),'欧洲':全球发数据.filter(function(c){return c.reg==='欧洲';}),'美洲':全球发数据.filter(function(c){return c.reg==='美洲';}),'中东':全球发数据.filter(function(c){return c.reg==='中东';}),'非洲':全球发数据.filter(function(c){return c.reg==='非洲';})};
+        var maps2={0:'全部',1:'亚太',2:'欧洲',3:'美洲',4:'中东',5:'非洲'};
+        Object.keys(maps2).forEach(function(k){
+            var cnt=regions_map[maps2[k]].length;
+            var sp=document.getElementById('s21cnt-'+k);
+            if(sp)sp.textContent='('+cnt+')';
+        });
+        筛选国家S21(0);
+        </script>
+    </section>
+
+    <section class="slide slide-bg-light" data-slide="22">
+        <div class="slide-content" style="overflow:hidden;">
+            <div class="section-tag reveal">APPENDIX · 薪酬数据</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;" class="reveal reveal-delay-1">
+                <h2>主要市场薪酬概况</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px;width:auto;object-fit:contain;">
+            </div>
+            <div style="display:grid;grid-template-columns:155px 1fr;gap:1.25rem;height:calc(100% - 6rem);">
+                <div class="reveal" style="overflow-y:auto;display:flex;flex-direction:column;gap:0.3rem;">
+                    <div class="country-btn active" id="s22btn-0" onclick="切换国家S22(0)">🇨🇳 中国内地</div>
+                    <div class="country-btn" id="s22btn-1" onclick="切换国家S22(1)">🇭🇰 香港</div>
+                    <div class="country-btn" id="s22btn-2" onclick="切换国家S22(2)">🇸🇬 新加坡</div>
+                    <div class="country-btn" id="s22btn-3" onclick="切换国家S22(3)">🇲🇾 马来西亚</div>
+                    <div class="country-btn" id="s22btn-4" onclick="切换国家S22(4)">🇹🇭 泰国</div>
+                    <div class="country-btn" id="s22btn-5" onclick="切换国家S22(5)">🇮🇳 印度</div>
+                    <div class="country-btn" id="s22btn-6" onclick="切换国家S22(6)">🇮🇩 印尼</div>
+                    <div class="country-btn" id="s22btn-7" onclick="切换国家S22(7)">🇵🇭 菲律宾</div>
+                    <div class="country-btn" id="s22btn-8" onclick="切换国家S22(8)">🇻🇳 越南</div>
+                    <div class="country-btn" id="s22btn-9" onclick="切换国家S22(9)">🇦🇺 澳大利亚</div>
+                    <div class="country-btn" id="s22btn-10" onclick="切换国家S22(10)">🇳🇿 新西兰</div>
+                </div>
+                <div id="s22-grid" class="reveal reveal-delay-1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;align-content:start;overflow-y:auto;"></div>
+            </div>
+        </div>
+        <div class="slide-num">22 / 23</div>
+        <script>
+        var salary_data=[
+            {cur:"¥",jobs:[["Java工程师","25000–45000"],["前端工程师","22000–40000"],["产品经理","28000–50000"],["UI设计师","18000–32000"],["数据分析师","20000–38000"],["运营专员","12000–22000"],["市场营销","15000–28000"],["财务专员","14000–26000"],["HR专员","12000–20000"],["物流专员","10000–18000"],["测试工程师","20000–36000"],["算法工程师","30000–60000"],["项目经理","26000–48000"],["客户服务","10000–18000"],["销售代表","8000–20000"]]},
+            {cur:"HK$",jobs:[["Java工程师","35000–60000"],["前端工程师","30000–55000"],["产品经理","40000–70000"],["UI设计师","25000–45000"],["数据分析师","28000–50000"],["运营专员","18000–30000"],["市场营销","20000–35000"],["财务专员","22000–40000"],["HR专员","18000–28000"],["物流专员","15000–25000"],["测试工程师","28000–45000"],["算法工程师","40000–70000"],["项目经理","35000–60000"],["客户服务","15000–25000"],["销售代表","12000–30000"]]},
+            {cur:"S$",jobs:[["Java工程师","8000–15000"],["前端工程师","7000–13000"],["产品经理","9000–18000"],["UI设计师","6000–11000"],["数据分析师","7000–14000"],["运营专员","4500–8000"],["市场营销","5000–9000"],["财务专员","5000–9500"],["HR专员","4500–8000"],["物流专员","4000–7500"],["测试工程师","6500–12000"],["算法工程师","10000–20000"],["项目经理","8000–16000"],["客户服务","4000–7000"],["销售代表","3500–9000"]]},
+            {cur:"RM",jobs:[["Java工程师","12000–22000"],["前端工程师","10000–18000"],["产品经理","14000–26000"],["UI设计师","8000–15000"],["数据分析师","10000–18000"],["运营专员","6000–10000"],["市场营销","7000–13000"],["财务专员","7000–12000"],["HR专员","6000–10000"],["物流专员","5000–9000"],["测试工程师","10000–18000"],["算法工程师","15000–30000"],["项目经理","13000–24000"],["客户服务","5000–9000"],["销售代表","5000–12000"]]},
+            {cur:"฿",jobs:[["Java工程师","25000–50000"],["前端工程师","20000–40000"],["产品经理","30000–60000"],["UI设计师","18000–35000"],["数据分析师","20000–40000"],["运营专员","12000–22000"],["市场营销","15000–30000"],["财务专员","15000–28000"],["HR专员","12000–22000"],["物流专员","10000–18000"],["测试工程师","20000–38000"],["算法工程师","30000–60000"],["项目经理","28000–55000"],["客户服务","10000–18000"],["销售代表","10000–25000"]]},
+            {cur:"₹",jobs:[["Java工程师","6000–15000"],["前端工程师","5000–12000"],["产品经理","8000–20000"],["UI设计师","4000–10000"],["数据分析师","5000–13000"],["运营专员","3000–7000"],["市场营销","4000–9000"],["财务专员","4000–10000"],["HR专员","3000–7000"],["物流专员","2500–6000"],["测试工程师","5000–12000"],["算法工程师","8000–20000"],["项目经理","7000–18000"],["客户服务","2500–6000"],["销售代表","3000–8000"]]},
+            {cur:"Rp",jobs:[["Java工程师","15000000–30000000"],["前端工程师","12000000–25000000"],["产品经理","18000000–35000000"],["UI设计师","10000000–20000000"],["数据分析师","12000000–25000000"],["运营专员","6000000–12000000"],["市场营销","7000000–15000000"],["财务专员","7000000–14000000"],["HR专员","6000000–12000000"],["物流专员","5000000–10000000"],["测试工程师","12000000–25000000"],["算法工程师","18000000–35000000"],["项目经理","15000000–30000000"],["客户服务","5000000–10000000"],["销售代表","5000000–15000000"]]},
+            {cur:"₱",jobs:[["Java工程师","50000–100000"],["前端工程师","40000–80000"],["产品经理","60000–120000"],["UI设计师","35000–70000"],["数据分析师","40000–80000"],["运营专员","20000–40000"],["市场营销","25000–50000"],["财务专员","25000–50000"],["HR专员","20000–40000"],["物流专员","18000–35000"],["测试工程师","40000–80000"],["算法工程师","60000–120000"],["项目经理","50000–100000"],["客户服务","18000–35000"],["销售代表","20000–50000"]]},
+            {cur:"₫",jobs:[["Java工程师","20000000–45000000"],["前端工程师","15000000–35000000"],["产品经理","25000000–50000000"],["UI设计师","12000000–25000000"],["数据分析师","15000000–35000000"],["运营专员","8000000–15000000"],["市场营销","10000000–20000000"],["财务专员","10000000–20000000"],["HR专员","8000000–15000000"],["物流专员","7000000–13000000"],["测试工程师","15000000–30000000"],["算法工程师","25000000–55000000"],["项目经理","20000000–45000000"],["客户服务","7000000–13000000"],["销售代表","8000000–20000000"]]},
+            {cur:"A$",jobs:[["Java工程师","9000–15000"],["前端工程师","7500–13000"],["产品经理","10000–18000"],["UI设计师","6500–11000"],["数据分析师","7500–13000"],["运营专员","5000–8500"],["市场营销","5500–9500"],["财务专员","5500–9500"],["HR专员","5000–8500"],["物流专员","4500–8000"],["测试工程师","7500–13000"],["算法工程师","10000–18000"],["项目经理","9000–16000"],["客户服务","4500–7500"],["销售代表","4500–10000"]]},
+            {cur:"NZ$",jobs:[["Java工程师","7500–13000"],["前端工程师","6000–11000"],["产品经理","8500–15000"],["UI设计师","5500–9500"],["数据分析师","6500–11000"],["运营专员","4000–7500"],["市场营销","4500–8000"],["财务专员","4500–8000"],["HR专员","4000–7500"],["物流专员","3800–7000"],["测试工程师","6000–11000"],["算法工程师","8500–15000"],["项目经理","7500–14000"],["客户服务","3800–6500"],["销售代表","3800–9000"]]}
+        ];
+        function 渲染薪资S22(cur,jobs){
+            var g=document.getElementById('s22-grid');
+            g.innerHTML='';
+            var t=document.createElement('div');
+            t.style.cssText='grid-column:1/-1;font-size:var(--small-size);font-weight:700;color:var(--brand-blue);padding:0.2rem 0 0.4rem;border-bottom:1px solid #eee;margin-bottom:0.2rem;';
+            t.textContent='单位：'+cur+'/月';
+            g.appendChild(t);
+            jobs.forEach(function(it){
+                var c=document.createElement('div');
+                c.style.cssText='background:#fafafa;border:1px solid #eee;border-radius:7px;padding:0.5rem 0.6rem;';
+                c.innerHTML='<div style="font-size:0.6rem;color:#666;margin-bottom:0.1rem;">'+it[0]+'</div><div style="font-size:var(--small-size);font-weight:700;color:var(--brand-blue);">'+it[1]+'</div>';
+                g.appendChild(c);
+            });
+        }
+        function 切换国家S22(idx){
+            var d=salary_data[idx];
+            渲染薪资S22(d.cur,d.jobs);
+            document.querySelectorAll('[id^="s22btn-"]').forEach(function(b,i){
+                if(i===idx){b.classList.add('active');b.style.background='#004BFE';b.style.color='white';}
+                else{b.classList.remove('active');b.style.background='#f5f7fa';b.style.color='var(--text-primary)';}
+            });
+        }
+        切换国家S22(0);
+        </script>
+    </section>
+
+    <section class="slide slide-bg-white" data-slide="23">
+        <div class="slide-content" style="overflow:hidden;">
+            <div class="section-tag reveal">APPENDIX · 国家详细数据</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;" class="reveal reveal-delay-1">
+                <h2 id="cp-title">🇭🇰 中国香港</h2>
+                <img src="assets/logo.png" alt="智联招聘" style="height:36px;width:auto;object-fit:contain;">
+            </div>
+            <div style="display:grid;grid-template-columns:155px 1fr;gap:1.25rem;height:calc(100% - 5.5rem);">
+                <div class="reveal" style="overflow-y:auto;display:flex;flex-direction:column;gap:0.3rem;">
+                    <div class="country-btn active" id="cpbtn-0" onclick="切换国家CP(0)">🇭🇰 中国香港</div>
+                    <div class="country-btn" id="cpbtn-1" onclick="切换国家CP(1)">🇸🇬 新加坡</div>
+                    <div class="country-btn" id="cpbtn-2" onclick="切换国家CP(2)">🇲🇾 马来西亚</div>
+                    <div class="country-btn" id="cpbtn-3" onclick="切换国家CP(3)">🇹🇭 泰国</div>
+                    <div class="country-btn" id="cpbtn-4" onclick="切换国家CP(4)">🇵🇭 菲律宾</div>
+                    <div class="country-btn" id="cpbtn-5" onclick="切换国家CP(5)">🇮🇩 印度尼西亚</div>
+                    <div class="country-btn" id="cpbtn-6" onclick="切换国家CP(6)">🇦🇺 澳大利亚</div>
+                    <div class="country-btn" id="cpbtn-7" onclick="切换国家CP(7)">🇳🇿 新西兰</div>
+                </div>
+                <div style="overflow-y:auto;display:flex;flex-direction:column;gap:0.6rem;" class="reveal reveal-delay-1">
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;">
+                        <div style="background:#EEF4FF;border-radius:10px;padding:0.7rem 1rem;text-align:center;border-left:3px solid #004BFE;">
+                            <div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">注册候选人</div>
+                            <div id="cp-reg" style="font-size:var(--body-size);font-weight:700;color:#004BFE;"></div>
+                        </div>
+                        <div style="background:#FFF7E6;border-radius:10px;padding:0.7rem 1rem;text-align:center;border-left:3px solid #F59E0B;">
+                            <div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">月均独立访客</div>
+                            <div id="cp-visitor" style="font-size:var(--body-size);font-weight:700;color:#F59E0B;"></div>
+                        </div>
+                        <div style="background:#F0FFF4;border-radius:10px;padding:0.7rem 1rem;text-align:center;border-left:3px solid #16a34a;">
+                            <div style="font-size:0.6rem;color:#666;margin-bottom:0.2rem;">月均访问量</div>
+                            <div id="cp-visit" style="font-size:var(--body-size);font-weight:700;color:#16a34a;"></div>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;flex:1;">
+                        <div style="background:#fafafa;border-radius:10px;padding:0.9rem;border:1px solid #eee;">
+                            <div style="font-size:0.7rem;color:#666;margin-bottom:0.5rem;font-weight:600;">求职者行业分布</div>
+                            <div id="cp-cand-bar" style="display:flex;flex-direction:column;gap:0.25rem;"></div>
+                        </div>
+                        <div style="background:#fafafa;border-radius:10px;padding:0.9rem;border:1px solid #eee;">
+                            <div style="font-size:0.7rem;color:#666;margin-bottom:0.5rem;font-weight:600;">招聘岗位行业分布</div>
+                            <div id="cp-job-bar" style="display:flex;flex-direction:column;gap:0.25rem;"></div>
+                        </div>
+                        <div style="background:#fafafa;border-radius:10px;padding:0.9rem;border:1px solid #eee;">
+                            <div style="font-size:0.7rem;color:#666;margin-bottom:0.5rem;font-weight:600;">求职者工作经验分布</div>
+                            <div id="cp-exp"></div>
+                        </div>
+                        <div style="background:#fafafa;border-radius:10px;padding:0.9rem;border:1px solid #eee;">
+                            <div style="font-size:0.7rem;color:#666;margin-bottom:0.5rem;font-weight:600;">访问渠道分布</div>
+                            <div id="cp-plat"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-num">23 / 23</div>
+        <script>
+        var cp_ctry=["🇭🇰 中国香港","🇸🇬 新加坡","🇲🇾 马来西亚","🇹🇭 泰国","🇵🇭 菲律宾","🇮🇩 印度尼西亚","🇦🇺 澳大利亚","🇳🇿 新西兰"];
+        var cp_reg=["300万+","300万+","700万+","400万+","1300万+","2000万+","3000万+","500万+"];
+        var cp_visitor=["160万+","160万+","200万+","200万+","350万+","700万+","1400万+","260万+"];
+        var cp_visit=["600万+","500万+","1100万+","600万+","1100万+","2600万+","1亿+","1000万+"];
+        var cp_cand=[[["行政/办公室支持","11%"],["银行/金融服务","9%"],["信息技术","8%"],["会计","7%"],["教育/培训","6%"],["制造业/物流","6%"],["市场营销","6%"],["零售/消费品","5%"],["工程","5%"],["酒店/旅游","5%"]],[["工程","12%"],["制造业/物流","11%"],["行政/办公室支持","9%"],["信息技术","9%"],["酒店/旅游","7%"],["会计","6%"],["销售","5%"],["零售/消费品","4%"],["教育/培训","4%"],["医疗健康","4%"]],[["制造业/物流","12%"],["工程","12%"],["行政/办公室支持","11%"],["会计","8%"],["信息技术","7%"],["酒店/旅游","6%"],["零售/消费品","5%"],["客服","4%"],["教育/培训","4%"],["销售","4%"]],[["工程","12%"],["信息技术","10%"],["制造业/物流","10%"],["行政/办公室支持","9%"],["销售","8%"],["市场营销","6%"],["会计","5%"],["客服","4%"],["酒店/旅游","4%"],["银行/金融服务","4%"]],[["客服","12%"],["行政/办公室支持","12%"],["酒店/旅游","10%"],["制造业/物流","8%"],["信息技术","7%"],["工程","6%"],["会计","6%"],["教育/培训","5%"],["零售/消费品","5%"],["医疗健康","4%"]],[["制造业/物流","17%"],["行政/办公室支持","12%"],["工程","9%"],["零售/消费品","7%"],["会计","7%"],["酒店/旅游","6%"],["信息技术","4%"],["市场营销","4%"],["销售","4%"],["客服","3%"]],[["酒店/旅游","10%"],["零售/消费品","10%"],["服务业","9%"],["制造业/物流","9%"],["行政/办公室支持","8%"],["医疗健康","7%"],["信息技术","6%"],["教育/培训","4%"],["建筑","4%"],["工程","4%"]],[["酒店/旅游","10%"],["制造业/物流","9%"],["零售/消费品","8%"],["信息技术","8%"],["行政/办公室支持","8%"],["服务业","7%"],["医疗健康","6%"],["工程","5%"],["教育/培训","4%"],["销售","4%"]]];
+        var cp_job=[[["信息技术","12%"],["银行/金融服务","10%"],["行政/办公室支持","9%"],["会计","8%"],["销售","7%"],["工程","6%"],["制造业/物流","6%"],["市场营销","6%"],["零售/消费品","4%"],["酒店/旅游","4%"]],[["工程","11%"],["制造业/物流","11%"],["信息技术","8%"],["销售","8%"],["行政/办公室支持","8%"],["会计","7%"],["医疗健康","6%"],["酒店/旅游","5%"],["教育/培训","5%"],["人力资源","4%"]],[["会计","12%"],["制造业/物流","11%"],["销售","10%"],["工程","9%"],["行政/办公室支持","8%"],["信息技术","7%"],["市场营销","6%"],["建筑","4%"],["人力资源","4%"],["酒店/旅游","4%"]],[["销售","14%"],["信息技术","12%"],["制造业/物流","10%"],["工程","9%"],["市场营销","9%"],["会计","9%"],["行政/办公室支持","6%"],["人力资源","5%"],["银行/金融服务","4%"],["零售/消费品","3%"]],[["会计","11%"],["信息技术","11%"],["客服","11%"],["销售","10%"],["制造业/物流","8%"],["行政/办公室支持","6%"],["零售/消费品","5%"],["市场营销","5%"],["人力资源","5%"],["工程","5%"]],[["销售","13%"],["制造业/物流","11%"],["会计","10%"],["零售/消费品","8%"],["市场营销","8%"],["行政/办公室支持","7%"],["工程","6%"],["信息技术","5%"],["酒店/旅游","4%"],["人力资源","4%"]],[["服务业","14%"],["医疗健康","12%"],["制造业/物流","9%"],["教育/培训","6%"],["行政/办公室支持","6%"],["酒店/旅游","5%"],["社区服务","5%"],["信息技术","5%"],["零售/消费品","4%"],["销售","4%"]],[["服务业","10%"],["制造业/物流","8%"],["信息技术","8%"],["医疗健康","7%"],["行政/办公室支持","6%"],["酒店/旅游","6%"],["销售","5%"],["社区服务","5%"],["零售/消费品","5%"],["会计","5%"]]];
+        var cp_exp=[[["≤1年","20%","#FF6B9D"],["2-5年","24%","#004BFE"],["6-10年","25%","#60A5FA"],["11-15年","16%","#A78BFA"],["15年+","16%","#34D399"]],[["≤1年","14%","#FF6B9D"],["2-5年","21%","#004BFE"],["6-10年","23%","#60A5FA"],["11-15年","19%","#A78BFA"],["15年+","23%","#34D399"]],[["≤1年","22%","#FF6B9D"],["2-5年","22%","#004BFE"],["6-10年","23%","#60A5FA"],["11-15年","15%","#A78BFA"],["15年+","20%","#34D399"]],[["≤1年","21%","#FF6B9D"],["2-5年","25%","#004BFE"],["6-10年","24%","#60A5FA"],["11-15年","15%","#A78BFA"],["15年+","15%","#34D399"]],[["≤1年","26%","#FF6B9D"],["2-5年","24%","#004BFE"],["6-10年","22%","#60A5FA"],["11-15年","12%","#A78BFA"],["15年+","15%","#34D399"]],[["≤1年","31%","#FF6B9D"],["2-5年","30%","#004BFE"],["6-10年","20%","#60A5FA"],["11-15年","11%","#A78BFA"],["15年+","8%","#34D399"]],[["≤1年","14%","#FF6B9D"],["2-5年","21%","#004BFE"],["6-10年","23%","#60A5FA"],["11-15年","19%","#A78BFA"],["15年+","23%","#34D399"]],[["≤1年","14%","#FF6B9D"],["2-5年","21%","#004BFE"],["6-10年","23%","#60A5FA"],["11-15年","18%","#A78BFA"],["15年+","23%","#34D399"]]];
+        var cp_plat=[[["网站","54%","#FF6B9D"],["App","46%","#004BFE"]],[["网站","54%","#FF6B9D"],["App","46%","#004BFE"]],[["App","51%","#004BFE"],["网站","49%","#FF6B9D"]],[["网站","53%","#FF6B9D"],["App","47%","#004BFE"]],[["网站","54%","#FF6B9D"],["App","46%","#004BFE"]],[["App","60%","#004BFE"],["网站","40%","#FF6B9D"]],[["网站","54%","#FF6B9D"],["App","46%","#004BFE"]],[["网站","99%","#FF6B9D"],["App","1%","#004BFE"]]];
+        function 渲染横条(id,data,color){
+            var el=document.getElementById(id);
+            el.innerHTML='';
+            var maxP=parseFloat(data[0][1]);
+            data.forEach(function(it){
+                var pct=parseFloat(it[1]);
+                var row=document.createElement('div');
+                row.style.cssText='display:flex;align-items:center;gap:0.4rem;font-size:0.7rem;';
+                row.innerHTML='<span style="width:4.5rem;flex-shrink:0;color:#444;">'+it[0]+'</span><div style="flex:1;background:#eee;border-radius:3px;height:6px;overflow:hidden;"><div style="width:'+(pct/maxP*100)+'%;background:'+color+';height:100%;border-radius:3px;"></div></div><span style="width:2rem;text-align:right;color:#666;flex-shrink:0;">'+it[1]+'</span>';
+                el.appendChild(row);
+            });
+        }
+        function 渲染经验(id,data){
+            var el=document.getElementById(id);
+            el.innerHTML='';
+            var total=data.reduce(function(s,d){return s+parseFloat(d[1]);},0);
+            var size=90,r=35,cx=45,cy=45;
+            var svg='<svg width="'+size+'" height="'+size+'" viewBox="0 0 90 90" style="flex-shrink:0;">';
+            var startAngle=-90;
+            data.forEach(function(it){
+                var val=parseFloat(it[1]);
+                var angle=(val/total)*360;
+                var endAngle=startAngle+angle;
+                var x1=cx+r*Math.cos(startAngle*Math.PI/180);
+                var y1=cy+r*Math.sin(startAngle*Math.PI/180);
+                var x2=cx+r*Math.cos(endAngle*Math.PI/180);
+                var y2=cy+r*Math.sin(endAngle*Math.PI/180);
+                var large=angle>180?1:0;
+                svg+='<path d="M'+cx+','+cy+' L'+x1+','+y1+' A'+r+','+r+' 0 '+large+',1 '+x2+','+y2+' Z" fill="'+it[2]+'" stroke="white" stroke-width="1"/>';
+                startAngle=endAngle;
+            });
+            svg+='<circle cx="'+cx+'" cy="'+cy+'" r="22" fill="white"/>';
+            svg+='</svg>';
+            var legend='';
+            data.forEach(function(it){
+                legend+='<div style="display:flex;align-items:center;gap:0.3rem;margin-bottom:0.25rem;"><span style="width:8px;height:8px;border-radius:50%;background:'+it[2]+';flex-shrink:0;"></span><span style="font-size:0.7rem;color:#444;">'+it[0]+'</span><span style="font-size:0.7rem;color:#666;margin-left:0.2rem;">'+it[1]+'</span></div>';
+            });
+            el.innerHTML='<div style="display:flex;gap:1rem;align-items:flex-start;">'+svg+'<div>'+legend+'</div></div>';
+        }
+        function 渲染渠道(id,data){
+            var el=document.getElementById(id);
+            el.innerHTML='';
+            var total=data.reduce(function(s,d){return s+parseFloat(d[1]);},0);
+            var size=90,r=35,cx=45,cy=45;
+            var svg='<svg width="'+size+'" height="'+size+'" viewBox="0 0 90 90" style="flex-shrink:0;">';
+            var startAngle=-90;
+            data.forEach(function(it){
+                var val=parseFloat(it[1]);
+                var angle=(val/total)*360;
+                var endAngle=startAngle+angle;
+                var x1=cx+r*Math.cos(startAngle*Math.PI/180);
+                var y1=cy+r*Math.sin(startAngle*Math.PI/180);
+                var x2=cx+r*Math.cos(endAngle*Math.PI/180);
+                var y2=cy+r*Math.sin(endAngle*Math.PI/180);
+                var large=angle>180?1:0;
+                svg+='<path d="M'+cx+','+cy+' L'+x1+','+y1+' A'+r+','+r+' 0 '+large+',1 '+x2+','+y2+' Z" fill="'+it[2]+'" stroke="white" stroke-width="1"/>';
+                startAngle=endAngle;
+            });
+            svg+='<circle cx="'+cx+'" cy="'+cy+'" r="22" fill="white"/>';
+            svg+='</svg>';
+            var legend='';
+            data.forEach(function(it){
+                legend+='<div style="display:flex;align-items:center;gap:0.3rem;margin-bottom:0.25rem;"><span style="width:9px;height:9px;border-radius:50%;background:'+it[2]+';flex-shrink:0;"></span><span style="font-size:0.7rem;color:#444;">'+it[0]+'</span><span style="font-size:0.7rem;color:#666;margin-left:0.2rem;">'+it[1]+'</span></div>';
+            });
+            el.innerHTML='<div style="display:flex;gap:1rem;align-items:flex-start;">'+svg+'<div>'+legend+'</div></div>';
+        }
+        function 切换国家CP(idx){
+            document.getElementById('cp-title').textContent=cp_ctry[idx];
+            document.getElementById('cp-reg').textContent=cp_reg[idx];
+            document.getElementById('cp-visitor').textContent=cp_visitor[idx];
+            document.getElementById('cp-visit').textContent=cp_visit[idx];
+            渲染横条('cp-cand-bar',cp_cand[idx],'#FF6B9D');
+            渲染横条('cp-job-bar',cp_job[idx],'#004BFE');
+            渲染经验('cp-exp',cp_exp[idx]);
+            渲染渠道('cp-plat',cp_plat[idx]);
+            document.querySelectorAll('[id^="cpbtn-"]').forEach(function(b,i){
+                if(i===idx){b.classList.add('active');b.style.background='#004BFE';b.style.color='white';}
+                else{b.classList.remove('active');b.style.background='#f5f7fa';b.style.color='var(--text-primary)';}
+            });
+        }
+        切换国家CP(0);
+        </script>
+    </section>
+
+    <script>
+        // Slide presentation
+        const slides = document.querySelectorAll('.slide');
+        const total = slides.length;
+        const progressBar = document.getElementById('progressBar');
+        const navDots = document.getElementById('navDots');
+
+        // Build nav dots
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'nav-dot';
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.addEventListener('click', () => slides[i].scrollIntoView({ behavior: 'smooth' }));
+            navDots.appendChild(dot);
+        });
+
+        // Initialize first slide as visible
+        if (slides.length > 0) slides[0].classList.add('visible');
+
+        // Intersection Observer for reveal + active dot
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(slides).indexOf(entry.target);
+                    progressBar.style.width = ((idx + 1) / total * 100) + '%';
+                    document.querySelectorAll('.nav-dot').forEach((d, i) => {
+                        d.classList.toggle('active', i === idx);
+                    });
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(s => observer.observe(s));
+
+        // Keyboard nav
+        let currentSlide = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                if (currentSlide < total - 1) {
+                    currentSlide++;
+                    slides.forEach(s => s.classList.remove('visible'));
+                    slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+                    slides[currentSlide].classList.add('visible');
+                    progressBar.style.width = ((currentSlide + 1) / total * 100) + '%';
+                    document.querySelectorAll('.nav-dot').forEach((d, i) => {
+                        d.classList.toggle('active', i === currentSlide);
+                    });
+                }
+            }
+            if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    slides.forEach(s => s.classList.remove('visible'));
+                    slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+                    slides[currentSlide].classList.add('visible');
+                    progressBar.style.width = ((currentSlide + 1) / total * 100) + '%';
+                    document.querySelectorAll('.nav-dot').forEach((d, i) => {
+                        d.classList.toggle('active', i === currentSlide);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
